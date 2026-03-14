@@ -4,6 +4,6 @@ name: "JetBrains"
 websiteUrl: "https://jetbrains.com"
 logoUrl: ""
 tier: "silver"
-isActive: true
+isActive: false
 sortOrder: 4
 ---

@@ -4,6 +4,6 @@ name: "Red Hat"
 websiteUrl: "https://redhat.com"
 logoUrl: ""
 tier: "gold"
-isActive: true
+isActive: false
 sortOrder: 2
 ---

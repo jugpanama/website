@@ -5,6 +5,6 @@ websiteUrl: "https://example.com/techbridge"
 logoUrl: ""
 category: "partner"
 tier: "silver"
-isActive: true
+isActive: false
 sortOrder: 1
 ---

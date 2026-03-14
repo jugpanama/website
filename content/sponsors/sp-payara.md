@@ -4,6 +4,6 @@ name: "Payara"
 websiteUrl: "https://payara.fish"
 logoUrl: ""
 tier: "silver"
-isActive: true
+isActive: false
 sortOrder: 2
 ---

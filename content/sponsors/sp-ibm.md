@@ -4,6 +4,6 @@ name: "IBM"
 websiteUrl: "https://ibm.com"
 logoUrl: ""
 tier: "gold"
-isActive: true
+isActive: false
 sortOrder: 3
 ---

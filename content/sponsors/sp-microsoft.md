@@ -4,6 +4,6 @@ name: "Microsoft"
 websiteUrl: "https://microsoft.com"
 logoUrl: ""
 tier: "bronze"
-isActive: true
+isActive: false
 sortOrder: 1
 ---

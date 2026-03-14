@@ -4,6 +4,6 @@ name: "Oracle"
 websiteUrl: "https://oracle.com"
 logoUrl: ""
 tier: "gold"
-isActive: true
+isActive: false
 sortOrder: 1
 ---
