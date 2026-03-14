@@ -105,8 +105,9 @@ export default function OpenGraphImage() {
           <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 720 }}>
             <div
               style={{
-                display: 'inline-flex',
+                display: 'flex',
                 alignItems: 'center',
+                alignSelf: 'flex-start',
                 padding: '10px 18px',
                 borderRadius: 9999,
                 border: '1px solid rgba(248,152,32,0.35)',
