@@ -40,10 +40,10 @@ export default function EventosProximosPage() {
                     {nextEvent.title}
                   </h2>
                   <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-[#6C757D]">
-                    <span className="font-mono text-[#2F4F7A]">{nextEvent.displayDate}</span>
+                    <span className="font-mono text-[#2F4F7A]">{nextEvent.displayDate ?? 'Fecha por confirmar'}</span>
                     <span className="inline-flex items-center gap-1.5">
                       <Clock className="h-4 w-4 text-[#2F4F7A]" />
-                      {nextEvent.time}
+                      {nextEvent.time ?? 'Hora por confirmar'}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
                       <MapPin className="h-4 w-4 text-[#2F4F7A]" />
@@ -104,7 +104,7 @@ export default function EventosProximosPage() {
                 <div className="bg-[#2F4F7A] px-5 py-5 md:px-8 md:py-6">
                   <div className="flex flex-wrap gap-3 mb-3">
                     <span className="font-mono text-sm text-[#F89820] bg-[#22385A] px-3 py-1 rounded">
-                      {event.displayDate}
+                      {event.displayDate ?? 'Fecha por confirmar'}
                     </span>
                     <span className="text-xs font-medium text-white border border-white/30 px-2 py-1 rounded">
                       {typeLabel[event.type] ?? event.type}
@@ -121,7 +121,7 @@ export default function EventosProximosPage() {
 
                   <div className="flex flex-wrap gap-5 text-sm text-[#6C757D] mb-5">
                     <span className="flex items-center gap-1.5">
-                      <Clock className="h-4 w-4" /> {event.time}
+                      <Clock className="h-4 w-4" /> {event.time ?? 'Hora por confirmar'}
                     </span>
                     <span className="flex items-center gap-1.5">
                       <MapPin className="h-4 w-4" /> {event.location}

@@ -77,7 +77,7 @@ export default function EventosPasadosPage() {
                 </div>
 
                 <div className="flex flex-col flex-grow p-5 sm:p-6">
-                  <p className="mb-3 font-mono text-xs text-[#6C757D]">{event.displayDate}</p>
+                  <p className="mb-3 font-mono text-xs text-[#6C757D]">{event.displayDate ?? 'Fecha por confirmar'}</p>
 
                   <h2 className="mb-2 text-lg font-semibold leading-snug text-[#212529] line-clamp-2">{event.title}</h2>
 
@@ -86,7 +86,7 @@ export default function EventosPasadosPage() {
                   <div className="mb-4 space-y-2 text-sm text-[#6C757D]">
                     <p className="flex items-center gap-2">
                       <Clock className="h-4 w-4 text-[#2F4F7A]" />
-                      {event.time}
+                      {event.time ?? 'Hora por confirmar'}
                     </p>
                     <p className="flex items-center gap-2">
                       <MapPin className="h-4 w-4 text-[#2F4F7A]" />

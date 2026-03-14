@@ -82,7 +82,7 @@ export default function PastEvents({
               <div className="p-5 flex flex-col flex-grow">
                 {/* Date */}
                 <p className="font-mono text-xs text-[#6C757D] mb-2">
-                  {event.displayDate}
+                  {event.displayDate ?? 'Fecha por confirmar'}
                 </p>
 
                 {/* Title */}

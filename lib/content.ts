@@ -10,13 +10,13 @@ const eventSchema = z.object({
   published: z.boolean().optional().default(true),
   title: z.string(),
   description: z.string(),
-  date: z.string(),
-  displayDate: z.string(),
+  date: z.string().optional(),
+  displayDate: z.string().optional(),
   type: z.enum(['virtual', 'presencial', 'hibrido']),
   status: z.enum(['upcoming', 'past', 'cancelled']),
   speakerName: z.string(),
   speakerCompany: z.string(),
-  time: z.string(),
+  time: z.string().optional(),
   location: z.string(),
   tags: z.array(z.string()),
   registrationOpen: z.boolean().optional().default(false),
@@ -43,6 +43,30 @@ const sponsorSchema = z.object({
 const EVENTS_UPCOMING_DIR = path.join(process.cwd(), 'content/events/actuales')
 const EVENTS_PAST_DIR = path.join(process.cwd(), 'content/events/pasados')
 const SPONSORS_DIR = path.join(process.cwd(), 'content/sponsors')
+
+function getEventTimestamp(dateValue?: string): number | null {
+  if (!dateValue) return null
+  const value = Date.parse(dateValue)
+  return Number.isNaN(value) ? null : value
+}
+
+function sortByDateAscWithUnknownLast(a: Event, b: Event): number {
+  const aTs = getEventTimestamp(a.date)
+  const bTs = getEventTimestamp(b.date)
+  if (aTs === null && bTs === null) return 0
+  if (aTs === null) return 1
+  if (bTs === null) return -1
+  return aTs - bTs
+}
+
+function sortByDateDescWithUnknownLast(a: Event, b: Event): number {
+  const aTs = getEventTimestamp(a.date)
+  const bTs = getEventTimestamp(b.date)
+  if (aTs === null && bTs === null) return 0
+  if (aTs === null) return 1
+  if (bTs === null) return -1
+  return bTs - aTs
+}
 
 function parseMarkdownFrontmatter<T>(filePath: string, schema: z.ZodSchema<T>): T | null {
   try {
@@ -86,7 +110,7 @@ export function getAllEventsFromMarkdown(): Event[] {
     .map((filePath) => parseMarkdownFrontmatter(filePath, eventSchema))
     .filter((event): event is Event => event !== null)
     .filter((event) => event.published !== false)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .sort(sortByDateAscWithUnknownLast)
 }
 
 export function getUpcomingEventsFromMarkdown(): Event[] {
@@ -95,7 +119,7 @@ export function getUpcomingEventsFromMarkdown(): Event[] {
     .filter((event): event is Event => event !== null)
     .filter((event) => event.published !== false)
     .filter((event) => event.status === 'upcoming')
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .sort(sortByDateAscWithUnknownLast)
 }
 
 export function getPastEventsFromMarkdown(): Event[] {
@@ -104,7 +128,7 @@ export function getPastEventsFromMarkdown(): Event[] {
     .filter((event): event is Event => event !== null)
     .filter((event) => event.published !== false)
     .filter((event) => event.status === 'past')
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .sort(sortByDateDescWithUnknownLast)
 }
 
 export function getNextEventWithEmbedFromMarkdown(): Event | null {

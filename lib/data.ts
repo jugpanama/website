@@ -12,24 +12,24 @@ export interface Event {
   id: string
   title: string
   description: string
-  date: string           // ISO string
-  displayDate: string    // e.g. "MAR 28, 2026"
+  date?: string
+  displayDate?: string
   type: EventType
   status: EventStatus
   speakerName: string
   speakerCompany: string
-  time: string
+  time?: string
   location: string
   tags: string[]
-  registrationOpen?: boolean // controls whether registration actions are shown
-  streamOpen?: boolean // controls whether YouTube live actions are shown
-  lumaEventId?: string   // e.g. evt-JMflFSoDIHu4QhA
-  lumaEmbedUrl?: string  // https://lu.ma/embed/event/{id}/simple
+  registrationOpen?: boolean
+  streamOpen?: boolean
+  lumaEventId?: string
+  lumaEmbedUrl?: string
   youtubeLiveUrl?: string
   youtubeEmbedUrl?: string
-  youtubeUrl?: string    // post-event recording
+  youtubeUrl?: string
   thumbnailUrl?: string
-  published?: boolean // visibility toggle for markdown-driven events
+  published?: boolean
 }
 
 export interface Sponsor {

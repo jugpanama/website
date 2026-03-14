@@ -3,10 +3,10 @@
 import { usePathname } from 'next/navigation'
 import { footerLinks } from '@/lib/data'
 import type { Event } from '@/lib/data'
-import { Github, Linkedin, Youtube, Twitter } from 'lucide-react'
+import { Github as GitHubIcon, Linkedin, Youtube, Twitter } from 'lucide-react'
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/jugpanama', label: 'GitHub', target: '_blank', rel: 'noopener noreferrer' },
+  { icon: GitHubIcon, href: 'https://github.com/jugpanama', label: 'GitHub', target: '_blank', rel: 'noopener noreferrer' },
   { icon: Linkedin, href: 'https://linkedin.com/company/jugpanama', label: 'LinkedIn', target: '_blank', rel: 'noopener noreferrer' },
   { icon: Youtube, href: 'https://youtube.com/@jugpanama', label: 'YouTube', target: '_blank', rel: 'noopener noreferrer' },
   { icon: Twitter, href: 'https://twitter.com/panamajug', label: 'Twitter', target: '_blank', rel: 'noopener noreferrer' },
@@ -93,7 +93,7 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
               <h4 className="font-semibold text-white mb-4">Próximo evento</h4>
               <div className="bg-[#2F4F7A] rounded-lg p-4 border border-white/10">
                 <p className="font-mono text-xs text-[#F89820] mb-2">
-                  {nextEvent.displayDate}
+                  {nextEvent.displayDate ?? 'Fecha por confirmar'}
                 </p>
                 <p className="text-white text-sm font-medium mb-3 line-clamp-2">
                   {nextEvent.title}

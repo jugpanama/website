@@ -39,14 +39,14 @@ export default function EventsEmbed({ nextEvent }: { nextEvent: Event | null }) 
               <CalendarDays className="h-3.5 w-3.5 text-[#F89820]" />
               Fecha
             </p>
-            <p className="text-sm font-medium text-white">{nextEvent.displayDate}</p>
+            <p className="text-sm font-medium text-white">{nextEvent.displayDate ?? 'Fecha por confirmar'}</p>
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[#D7E1EE]">
             <p className="mb-1 flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.14em] text-[#FFD8A6]">
               <Clock3 className="h-3.5 w-3.5 text-[#F89820]" />
               Hora
             </p>
-            <p className="text-sm font-medium text-white">{nextEvent.time}</p>
+            <p className="text-sm font-medium text-white">{nextEvent.time ?? 'Hora por confirmar'}</p>
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[#D7E1EE]">
             <p className="mb-1 flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.14em] text-[#FFD8A6]">
