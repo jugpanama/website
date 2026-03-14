@@ -1,0 +1,241 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* JUG Panama Color Palette */
+  --color-navy: #2F4F7A;
+  --color-navy-dark: #22385A;
+  --color-navy-light: #3A5F91;
+  --color-red: #F89820;
+  --color-red-hover: #DD7A0A;
+  --color-white: #FFFFFF;
+  --color-gray-50: #F8F9FA;
+  --color-gray-100: #F1F3F5;
+  --color-gray-300: #CED4DA;
+  --color-gray-600: #6C757D;
+  --color-gray-900: #212529;
+  
+  /* Shadcn tokens mapped to JUG Panama */
+  --background: var(--color-white);
+  --foreground: var(--color-gray-900);
+  --card: var(--color-white);
+  --card-foreground: var(--color-gray-900);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-gray-900);
+  --primary: var(--color-red);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-gray-100);
+  --secondary-foreground: var(--color-gray-900);
+  --muted: var(--color-gray-100);
+  --muted-foreground: var(--color-gray-600);
+  --accent: var(--color-navy);
+  --accent-foreground: var(--color-white);
+  --destructive: var(--color-red);
+  --destructive-foreground: var(--color-white);
+  --border: var(--color-gray-300);
+  --input: var(--color-gray-300);
+  --ring: var(--color-red);
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: 'IBM Plex Sans', 'IBM Plex Sans Fallback', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'IBM Plex Mono Fallback', monospace;
+  
+  /* JUG Panama Colors */
+  --color-navy: var(--color-navy);
+  --color-navy-dark: var(--color-navy-dark);
+  --color-navy-light: var(--color-navy-light);
+  --color-jug-red: var(--color-red);
+  --color-jug-red-hover: var(--color-red-hover);
+  --color-jug-white: var(--color-white);
+  --color-jug-gray-50: var(--color-gray-50);
+  --color-jug-gray-100: var(--color-gray-100);
+  --color-jug-gray-300: var(--color-gray-300);
+  --color-jug-gray-600: var(--color-gray-600);
+  --color-jug-gray-900: var(--color-gray-900);
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F89820] focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+  }
+
+  .focus-ring-inverse {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F89820] focus-visible:ring-offset-2 focus-visible:ring-offset-[#22385A];
+  }
+
+  .tap-target {
+    min-height: 44px;
+  }
+
+  .form-field {
+    @apply w-full rounded-lg border border-[#CED4DA] bg-white px-4 py-2.5 text-sm text-[#212529] placeholder:text-[#6C757D] transition-colors;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F4F7A] focus-visible:ring-offset-2 focus-visible:ring-offset-white focus:border-[#2F4F7A];
+  }
+}
+
+/* Hero animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-1 {
+  animation: fadeInUp 0.6s ease-out 0.15s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-2 {
+  animation: fadeInUp 0.6s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-3 {
+  animation: fadeInUp 0.6s ease-out 0.45s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-4 {
+  animation: fadeInUp 0.6s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+.animate-count-up {
+  animation: countUp 0.8s ease-out 0.75s forwards;
+  opacity: 0;
+}
+
+/* Hero word cycling animation */
+@keyframes wordIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-word-cycle {
+  display: inline-block;
+  animation: wordIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Sponsor logo grayscale effect */
+.sponsor-logo {
+  transition: filter 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sponsor-logo {
+    filter: grayscale(100%);
+  }
+
+  .sponsor-logo:hover {
+    filter: grayscale(0%);
+  }
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.18), 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+}
+
+/* Navbar scroll — glass edge */
+.navbar-scrolled {
+  background-color: rgba(34, 56, 90, 0.97);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 6px 24px -4px rgba(0, 0, 0, 0.35);
+}
+
+/* Hero SVG float */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.animate-float {
+  animation: floatSlow 10s ease-in-out infinite;
+}
+
+/* Badge pulse dot */
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.6); }
+}
+
+.pulse-dot {
+  animation: pulseDot 2.4s ease-in-out infinite;
+}
