@@ -85,8 +85,9 @@ export default function OpenGraphImage() {
               PJ
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: 52, fontWeight: 800, lineHeight: 1 }}>
-                Panama <span style={{ color: '#F89820' }}>JUG</span>
+              <div style={{ display: 'flex', alignItems: 'center', fontSize: 52, fontWeight: 800, lineHeight: 1 }}>
+                <span>Panama</span>
+                <span style={{ color: '#F89820', marginLeft: 10 }}>JUG</span>
               </div>
               <div
                 style={{
