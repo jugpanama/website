@@ -1,0 +1,38 @@
+name: Dependabot Build Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6.3.0
+        with:
+          node-version: 22.22.1
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          RESEND_API_KEY: re_placeholder
+          RESEND_FROM_EMAIL: "Panama JUG <forms@panamajug.org>"
+          CONTACT_INBOX_EMAIL: contact@example.com
+          RESEND_TEMPLATE_CONTACT_ACK_ID: re_placeholder
+          RESEND_TEMPLATE_SPONSOR_ACK_ID: re_placeholder
+          TURNSTILE_SITE_KEY: 0x000000000
+          TURNSTILE_SECRET_KEY: 0x000000000
