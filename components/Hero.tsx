@@ -103,7 +103,7 @@ export default function Hero({ stats, primaryCtaHref, primaryCtaLabel }: HeroPro
 
         {/* Subheadline */}
         <p className="animate-fade-in-up-delay-2 text-[16px] sm:text-lg md:text-xl text-[#D6DCE3] max-w-[22rem] sm:max-w-[34rem] mx-auto mb-8 sm:mb-10 leading-relaxed">
-          JUG Panama conecta desarrolladores, speakers, sponsors y partners a través de meetups técnicos presenciales y virtuales.
+          Panama JUG conecta desarrolladores, speakers, sponsors y partners a través de meetups técnicos presenciales y virtuales.
         </p>
 
         {/* CTA */}

@@ -1,6 +1,6 @@
-# JUG Panama Website
+# Panama JUG Website
 
-Sitio web oficial de JUG Panama para compartir informacion de la comunidad Java en Panama.
+Sitio web oficial de Panama JUG para compartir informacion de la comunidad Java en Panama.
 
 ## Que incluye
 
@@ -64,4 +64,4 @@ Se usa **Cloudflare Turnstile** en ambos formularios (`contactanos` y `convierte
 
 ## Objetivo
 
-Mantener una presencia web simple, clara y actualizada para las actividades de JUG Panama.
+Mantener una presencia web simple, clara y actualizada para las actividades de Panama JUG.

@@ -1,4 +1,4 @@
-// JUG Panama — Shared Types and Navigation
+// Panama JUG — Shared Types and Navigation
 // Events and sponsors content now comes from Markdown via lib/content.ts.
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -60,7 +60,7 @@ export const footerLinks = {
     { href: '/#sponsors', label: 'Sponsors' },
   ],
   community: [
-    { href: '/sobre-jug-panama', label: 'Sobre JUG Panama' },
+    { href: '/sobre-jug-panama', label: 'Sobre Panama JUG' },
     { href: '/conviertete-en-sponsor', label: 'Conviértete en sponsor' },
     { href: '/codigo-de-conducta', label: 'Código de conducta' },
     { href: '/contactanos', label: 'Contáctanos' },
