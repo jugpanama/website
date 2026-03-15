@@ -114,7 +114,7 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
             <div className="mb-12 md:mb-16 rounded-2xl border border-dashed border-[#CED4DA] bg-[#F8F9FA] p-8 text-center">
               <p className="font-semibold text-[#212529] mb-2">Sponsors y partners próximamente</p>
               <p className="text-sm text-[#6C757D] max-w-2xl mx-auto">
-                Estamos abriendo nuevos espacios de colaboración. Muy pronto publicaremos aquí las marcas y aliados que acompañan a JUG Panama.
+                Estamos abriendo nuevos espacios de colaboración. Muy pronto publicaremos aquí las marcas y aliados que acompañan a Panama JUG.
               </p>
             </div>
           )}
@@ -178,7 +178,7 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
                 Programa de sponsors 2026
               </p>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                ¿Tu empresa quiere ser sponsor de JUG Panama?
+                ¿Tu empresa quiere ser sponsor de Panama JUG?
               </h3>
               <p className="text-[#D7E1EE] text-sm md:text-base max-w-2xl">
                 Conecta tu marca con la comunidad Java local a través de eventos técnicos, contenido y networking de alto valor.
@@ -187,7 +187,7 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
             <div className="md:justify-self-end">
               <a
                 href="/conviertete-en-sponsor"
-                aria-label="Ir a la página para convertirse en sponsor de JUG Panama"
+                aria-label="Ir a la página para convertirse en sponsor de Panama JUG"
                 className="focus-ring tap-target inline-flex items-center justify-center gap-2 rounded-lg bg-[#F89820] px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
               >
                 Quiero ser sponsor

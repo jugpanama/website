@@ -33,10 +33,10 @@ export const metadata: Metadata = {
     description: 'La comunidad Java y JVM más activa de Panamá. Eventos, talleres y networking para desarrolladores.',
     images: [
       {
-        url: '/opengraph-image',
+        url: 'https://panamajug.org/portada-web-social.png',
         width: 1200,
         height: 630,
-        alt: 'Panama JUG',
+        alt: 'Portada Panama JUG',
       },
     ],
   },
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Panama JUG',
     description: 'La comunidad Java y JVM más activa de Panamá. Eventos, talleres y networking para desarrolladores.',
-    images: ['/opengraph-image'],
+    images: ['https://panamajug.org/portada-web-social.png'],
   },
   icons: {
     icon: [{ url: '/jugpanlogo.png', type: 'image/png' }],
