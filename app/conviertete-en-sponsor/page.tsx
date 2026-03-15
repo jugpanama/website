@@ -1,7 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { useEffect } from 'react'
 import Link from 'next/link'
+import Script from 'next/script'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Megaphone, Users, Sparkles } from 'lucide-react'
@@ -27,7 +29,41 @@ const sponsorBenefits = [
 
 export default function ConvierteteEnSponsorPage() {
   const [submitted, setSubmitted] = useState(false)
+  const [isSending, setIsSending] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const [benefitsRef, benefitsInView] = useInView()
+  const [turnstileSiteKey, setTurnstileSiteKey] = useState('')
+
+  useEffect(() => {
+    let isMounted = true
+
+    void fetch('/api/turnstile/config', { cache: 'no-store' })
+      .then(async (response) => {
+        if (!response.ok) {
+          return { siteKey: '' }
+        }
+
+        return (await response.json()) as { siteKey?: string }
+      })
+      .then((data) => {
+        if (!isMounted) {
+          return
+        }
+
+        setTurnstileSiteKey(data.siteKey ?? '')
+      })
+      .catch(() => {
+        if (!isMounted) {
+          return
+        }
+
+        setTurnstileSiteKey('')
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   return (
     <div className="min-h-screen bg-[#F8F9FA]">
@@ -78,44 +114,159 @@ export default function ConvierteteEnSponsorPage() {
 
               <form
                 className="grid gap-5 md:grid-cols-2"
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault()
-                  setSubmitted(true)
+                  setIsSending(true)
+                  setErrorMessage('')
+
+                  const form = e.currentTarget
+                  const formData = new FormData(form)
+                  const payload = {
+                    fullName: String(formData.get('fullName') ?? ''),
+                    email: String(formData.get('email') ?? ''),
+                    company: String(formData.get('company') ?? ''),
+                    websiteUrl: String(formData.get('websiteUrl') ?? ''),
+                    interest: String(formData.get('interest') ?? ''),
+                    message: String(formData.get('message') ?? ''),
+                    website: String(formData.get('website') ?? ''),
+                    captchaToken: String(formData.get('cf-turnstile-response') ?? ''),
+                  }
+
+                  if (!payload.captchaToken) {
+                    setErrorMessage('Completa el captcha antes de enviar.')
+                    setIsSending(false)
+                    return
+                  }
+
+                  try {
+                    const response = await fetch('/api/sponsor', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(payload),
+                    })
+
+                    if (!response.ok) {
+                      const body = (await response.json().catch(() => null)) as { error?: string } | null
+                      throw new Error(body?.error ?? 'No se pudo enviar la solicitud.')
+                    }
+
+                    form.reset()
+                    setSubmitted(true)
+                  } catch (error) {
+                    const message = error instanceof Error ? error.message : 'No se pudo enviar la solicitud.'
+                    setErrorMessage(message)
+                  } finally {
+                    setIsSending(false)
+                  }
                 }}
               >
                 <div>
                   <label htmlFor="fullName" className="block text-sm font-medium text-[#212529] mb-1.5">Nombre completo</label>
-                  <input id="fullName" required className="form-field" />
+                  <input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    required
+                    autoComplete="name"
+                    minLength={2}
+                    maxLength={120}
+                    className="form-field"
+                  />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-[#212529] mb-1.5">Correo</label>
-                  <input id="email" type="email" required className="form-field" />
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    maxLength={254}
+                    className="form-field"
+                  />
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-[#212529] mb-1.5">Empresa</label>
-                  <input id="company" required className="form-field" />
+                  <input
+                    id="company"
+                    name="company"
+                    type="text"
+                    required
+                    autoComplete="organization"
+                    minLength={2}
+                    maxLength={140}
+                    className="form-field"
+                  />
                 </div>
                 <div>
-                  <label htmlFor="website" className="block text-sm font-medium text-[#212529] mb-1.5">Sitio web</label>
-                  <input id="website" type="url" placeholder="https://" className="form-field" />
+                  <label htmlFor="websiteUrl" className="block text-sm font-medium text-[#212529] mb-1.5">Sitio web</label>
+                  <input
+                    id="websiteUrl"
+                    name="websiteUrl"
+                    type="url"
+                    autoComplete="url"
+                    inputMode="url"
+                    maxLength={2048}
+                    placeholder="https://"
+                    className="form-field"
+                  />
                 </div>
                 <div className="md:col-span-2">
                   <label htmlFor="interest" className="block text-sm font-medium text-[#212529] mb-1.5">Tipo de interés</label>
-                  <select id="interest" className="form-field tap-target">
+                  <select id="interest" name="interest" required className="form-field tap-target">
                     <option>Patrocinio anual</option>
                     <option>Patrocinio por evento</option>
                     <option>Alianza de contenido</option>
                     <option>Otro</option>
                   </select>
                 </div>
+                <input
+                  type="text"
+                  name="website"
+                  autoComplete="off"
+                  tabIndex={-1}
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 <div className="md:col-span-2">
                   <label htmlFor="message" className="block text-sm font-medium text-[#212529] mb-1.5">Mensaje</label>
-                  <textarea id="message" required rows={4} className="form-field min-h-32 resize-none" placeholder="Cuéntanos qué tipo de colaboración tienen en mente..." />
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={4}
+                    minLength={10}
+                    maxLength={5000}
+                    className="form-field min-h-32 resize-none"
+                    placeholder="Cuéntanos qué tipo de colaboración tienen en mente..."
+                  />
                 </div>
+                {turnstileSiteKey ? (
+                  <div className="md:col-span-2">
+                    <Script
+                      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                      strategy="afterInteractive"
+                    />
+                    <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" />
+                  </div>
+                ) : (
+                  <div className="md:col-span-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+                    Falta configurar <code>TURNSTILE_SITE_KEY</code>.
+                  </div>
+                )}
+                {errorMessage && (
+                  <div className="md:col-span-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
+                    {errorMessage}
+                  </div>
+                )}
                 <div className="md:col-span-2 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between pt-1">
                   <p className="text-xs text-[#6C757D]">Tus datos solo se usarán para responder esta solicitud. No compartiremos tu información con terceros.</p>
-                  <button type="submit" className="focus-ring tap-target inline-flex items-center justify-center rounded bg-[#F89820] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]">
-                    Enviar solicitud
+                  <button
+                    type="submit"
+                    disabled={isSending}
+                    className="focus-ring tap-target inline-flex items-center justify-center rounded bg-[#F89820] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A] disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {isSending ? 'Enviando...' : 'Enviar solicitud'}
                   </button>
                 </div>
               </form>
