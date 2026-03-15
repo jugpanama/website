@@ -19,3 +19,17 @@ updates:
       - dependency-name: "*"
         update-types:
           - "version-update:semver-major"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      day: "monday"
+      time: "04:30"
+      timezone: "America/Panama"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(actions)"
+      include: "scope"
+    labels:
+      - "actions"
+      - "github-actions"
