@@ -32,9 +32,9 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
         {/* Header */}
         <div
           ref={headerRef}
-          className={`flex flex-col md:flex-row md:items-end md:justify-between mb-12 transition-all duration-700 ease-out ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
+          className={`mb-12 transition-all duration-700 ease-out ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
         >
-          <div>
+          <div className="max-w-2xl">
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#F89820]/35 bg-[#F89820]/10 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#FFD8A6]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
               Próximos eventos
@@ -45,13 +45,13 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#D7E1EE] md:text-base">
               Revisa la próxima agenda de la comunidad, con detalles de speaker, modalidad y acciones disponibles para registro o transmisión.
             </p>
+            <Link
+              href="/eventos/proximos"
+              className="focus-ring-inverse mt-5 inline-flex w-full items-center justify-center rounded-full border border-[#F8B04A]/45 bg-[#22385A]/30 px-5 py-2.5 text-[#FFD08A] font-semibold transition-colors hover:border-[#F8B04A] hover:text-white sm:w-auto"
+            >
+              Ver agenda completa <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
           </div>
-          <Link
-            href="/eventos/proximos"
-            className="focus-ring-inverse mt-5 inline-flex items-center rounded-full border border-[#F8B04A]/45 bg-[#22385A]/30 px-5 py-2.5 text-[#FFD08A] font-semibold transition-colors hover:border-[#F8B04A] hover:text-white md:mt-0"
-          >
-            Ver agenda completa <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
         </div>
 
         {upcomingEvents.length === 0 && (
