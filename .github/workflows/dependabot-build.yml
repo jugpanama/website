@@ -1,4 +1,4 @@
-name: Dependabot Build Check
+name: PR Build Check
 
 on:
   pull_request:
@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   build:
-    if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-24.04
 
     steps:
