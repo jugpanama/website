@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { footerLinks } from '@/lib/data'
 import type { Event } from '@/lib/data'
 import { Github as GitHubIcon, Linkedin, Youtube, Twitter } from 'lucide-react'
+import packageJson from '@/package.json'
 
 const socialLinks = [
   { icon: GitHubIcon, href: 'https://github.com/jugpanama', label: 'GitHub', target: '_blank', rel: 'noopener noreferrer' },
@@ -14,6 +15,7 @@ const socialLinks = [
 
 export default function Footer({ nextEvent = null }: { nextEvent?: Event | null }) {
   const pathname = usePathname()
+  const siteVersion = packageJson.version
 
   function sectionHref(href: string) {
     if (pathname !== '/') return href
@@ -112,11 +114,14 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-[#CED4DA]">
-            © 2026 JUG Panama.
+            © 2026 Panama JUG.
           </p>
-          <p className="text-sm text-[#CED4DA]">
-            Hecho con ☕ en Panamá
-          </p>
+          <div className="flex flex-col items-center gap-1 sm:items-end">
+            <p className="text-sm text-[#CED4DA]">
+              Hecho con ☕ en Panamá
+            </p>
+            <p className="text-xs text-[#ADB5BD]">Version v{siteVersion}</p>
+          </div>
         </div>
       </div>
     </footer>
