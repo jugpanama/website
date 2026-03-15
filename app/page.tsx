@@ -6,6 +6,7 @@ import PastEvents from '@/components/PastEvents'
 import EventsEmbed from '@/components/EventsEmbed'
 import Sponsors from '@/components/Sponsors'
 import Footer from '@/components/Footer'
+import MeetTheTeam from '@/components/MeetTheTeam'
 import {
   getNextEventWithEmbedFromMarkdown,
   getPastEventsFromMarkdown,
@@ -52,6 +53,7 @@ export default function Home() {
         <PastEvents pastEvents={pastEventsPreview} totalCount={pastEvents.length} />
         <EventsEmbed nextEvent={nextEvent} />
         <Sponsors sponsors={sponsors} />
+        <MeetTheTeam />
       </main>
       <Footer nextEvent={upcomingEvents[0] ?? null} />
     </>
