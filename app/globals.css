@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* JUG Panama Color Palette */
+  /* Panama JUG Color Palette */
   --color-navy: #2F4F7A;
   --color-navy-dark: #22385A;
   --color-navy-light: #3A5F91;
@@ -17,7 +17,7 @@
   --color-gray-600: #6C757D;
   --color-gray-900: #212529;
   
-  /* Shadcn tokens mapped to JUG Panama */
+  /* Shadcn tokens mapped to Panama JUG */
   --background: var(--color-white);
   --foreground: var(--color-gray-900);
   --card: var(--color-white);
@@ -44,7 +44,7 @@
   --font-sans: 'IBM Plex Sans', 'IBM Plex Sans Fallback', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', 'IBM Plex Mono Fallback', monospace;
   
-  /* JUG Panama Colors */
+  /* Panama JUG Colors */
   --color-navy: var(--color-navy);
   --color-navy-dark: var(--color-navy-dark);
   --color-navy-light: var(--color-navy-light);

@@ -46,7 +46,7 @@ export default function About() {
               Una comunidad construida por y para desarrolladores
             </h2>
             <p className="mb-8 max-w-2xl text-base leading-relaxed text-[#495057] md:text-lg">
-              JUG Panama es un grupo de usuarios Java independiente, sin fines de lucro,
+              Panama JUG es un grupo de usuarios Java independiente, sin fines de lucro,
               dedicado a promover el ecosistema Java y JVM en Panamá. Organizamos eventos
               técnicos, charlas, talleres y conferencias para que los desarrolladores
               locales puedan aprender, conectar y crecer profesionalmente.

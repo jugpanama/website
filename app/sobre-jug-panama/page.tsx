@@ -39,13 +39,13 @@ export default function SobreJugPanamaPage() {
         <section className="mx-auto max-w-5xl">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/25 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
-            Sobre JUG Panama
+            Sobre Panama JUG
           </p>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#212529] mb-4">
             Comunidad Java para aprender, conectar y construir
           </h1>
           <p className="text-[#495057] text-base md:text-lg leading-relaxed max-w-3xl">
-            JUG Panama es una comunidad abierta para desarrolladores Java y JVM en Panamá y
+            Panama JUG es una comunidad abierta para desarrolladores Java y JVM en Panamá y
             Latinoamérica. Organizamos meetups, talleres y espacios de networking para impulsar
             habilidades técnicas, colaboración y oportunidades profesionales.
           </p>

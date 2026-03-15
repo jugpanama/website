@@ -1,4 +1,4 @@
-# JUG Panama — Project Requirements
+# Panama JUG — Project Requirements
 
 **Versión:** 1.0  
 **Fecha:** Marzo 2026  
@@ -26,7 +26,7 @@
 
 ## 1. Visión general
 
-**JUG Panama** es el sitio web oficial del Java User Group de Panamá. Su objetivo es centralizar la presencia digital de la comunidad, facilitar el registro de miembros, gestionar eventos y comunicarse con la audiencia.
+**Panama JUG** es el sitio web oficial del Java User Group de Panamá. Su objetivo es centralizar la presencia digital de la comunidad, facilitar el registro de miembros, gestionar eventos y comunicarse con la audiencia.
 
 ### Objetivos por prioridad
 
@@ -39,7 +39,7 @@
 
 ### Principios de diseño del producto
 
-- **Luma gestiona eventos** — JUG Panama no reinventa la rueda. El registro, waitlists, recordatorios y tickets son responsabilidad de Luma. El sitio solo consume su embed.
+- **Luma gestiona eventos** — Panama JUG no reinventa la rueda. El registro, waitlists, recordatorios y tickets son responsabilidad de Luma. El sitio solo consume su embed.
 - **Membresía gratuita** — sin pagos, sin Stripe, sin complejidad de billing.
 - **Un solo tema visual** — modo oscuro únicamente. Sin toggle light/dark.
 - **Mobile-first** — la mayoría de miembros accede desde dispositivos móviles.
@@ -382,7 +382,7 @@ create trigger on_auth_user_created
 |---|---|---|
 | `<Navbar />` | — | Navegación sticky, logo, links, CTA "Únete gratis" |
 | `<Hero />` | — | Headline, subheadline, stats (miembros, eventos, años) |
-| `<About />` | — | Misión de JUG Panama, features pills |
+| `<About />` | — | Misión de Panama JUG, features pills |
 | `<UpcomingEvents />` | — | Cards de próximos eventos (hardcoded), con aviso de membresía |
 | `<PastEvents />` | — | Grid de eventos pasados con thumbnail, tags, link a YouTube |
 | `<EventsEmbed />` | — | iframe de Luma para el evento más próximo |
@@ -463,7 +463,7 @@ Redirect URLs:
   - http://localhost:3000/auth/callback
 
 Email templates a personalizar en Supabase Dashboard:
-  - Confirm signup     → bienvenida de JUG Panama
+  - Confirm signup     → bienvenida de Panama JUG
   - Magic Link         → acceso sin contraseña
   - Reset password     → (Fase 2, opcional)
 ```
@@ -518,9 +518,9 @@ Lógica en `<UpcomingEvents />`:
 
 ```typescript
 // Template mínimo requerido:
-// - Asunto: "Bienvenido a JUG Panama ☕"
+// - Asunto: "Bienvenido a Panama JUG ☕"
 // - Saludo personalizado con full_name
-// - Descripción breve de qué es JUG Panama
+// - Descripción breve de qué es Panama JUG
 // - Link a /eventos/proximos
 // - Link a redes sociales
 // - Footer con opción de unsubscribe
@@ -799,11 +799,11 @@ SUPABASE_SERVICE_ROLE_KEY=eyJ...   # NUNCA exponer al cliente
 # Resend
 RESEND_API_KEY=re_...
 RESEND_FROM_EMAIL=noreply@jugpanama.com
-RESEND_FROM_NAME=JUG Panama
+RESEND_FROM_NAME=Panama JUG
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_SITE_NAME=JUG Panama
+NEXT_PUBLIC_SITE_NAME=Panama JUG
 ```
 
 ### Variables requeridas en Vercel
@@ -1016,4 +1016,4 @@ Las migraciones SQL se aplican manualmente via Supabase Dashboard o Supabase CLI
 
 ---
 
-*Documento mantenido por el equipo de JUG Panama. Actualizar al completar cada fase.*
+*Documento mantenido por el equipo de Panama JUG. Actualizar al completar cada fase.*
