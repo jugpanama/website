@@ -77,13 +77,24 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
   const hasSponsors = sponsorCompanies.length > 0
   const hasPartners = partnerCompanies.length > 0
   const hasAnyCompanies = hasSponsors || hasPartners
-  const sectionLabel = hasSponsors && hasPartners ? 'Sponsors & Partners' : hasPartners ? 'Partners' : 'Sponsors'
-  const sectionTitle =
-    hasSponsors && hasPartners
-      ? 'Empresas y aliados que hacen posible la comunidad'
-      : hasPartners
-        ? 'Aliados que hacen posible la comunidad'
-        : 'Empresas que hacen posible la comunidad'
+  // Cabecera y mensaje: si solo hay partners, mostrar cabecera de sponsors
+  let sectionLabel = 'Sponsors'
+  let sectionTitle = 'Empresas que hacen posible la comunidad'
+  let showPartnerBlockLabel = false
+  let showNoSponsorsMessage = false
+  let showPartnersHeaderBelow = false
+
+  if (hasSponsors && hasPartners) {
+    sectionLabel = 'Sponsors & Partners'
+    sectionTitle = 'Empresas y aliados que hacen posible la comunidad'
+    showPartnerBlockLabel = true
+  } else if (hasPartners && !hasSponsors) {
+    sectionLabel = 'Sponsors'
+    sectionTitle = 'Empresas que hacen posible la comunidad'
+    showPartnerBlockLabel = false
+    showNoSponsorsMessage = true
+    showPartnersHeaderBelow = true
+  }
   const [headerRef, headerInView] = useInView()
   const [tiersRef, tiersInView] = useInView()
   const [ctaRef, ctaInView] = useInView()
@@ -110,12 +121,24 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
           ref={tiersRef}
           className={`transition-all duration-1000 ease-out ${tiersInView ? 'opacity-100' : 'opacity-0'}`}
         >
-          {!hasAnyCompanies && (
+          {(!hasAnyCompanies || showNoSponsorsMessage) && (
             <div className="mb-12 md:mb-16 rounded-2xl border border-dashed border-[#CED4DA] bg-[#F8F9FA] p-8 text-center">
-              <p className="font-semibold text-[#212529] mb-2">Sponsors y partners próximamente</p>
+              <p className="font-semibold text-[#212529] mb-2">Sponsors próximamente</p>
               <p className="text-sm text-[#6C757D] max-w-2xl mx-auto">
-                Estamos abriendo nuevos espacios de colaboración. Muy pronto publicaremos aquí las marcas y aliados que acompañan a Panama JUG.
+                Estamos abriendo nuevos espacios de colaboración. Muy pronto publicaremos aquí las marcas que acompañan a Panama JUG.
               </p>
+            </div>
+          )}
+
+          {showPartnersHeaderBelow && (
+            <div className="mb-12 md:mb-16 text-center">
+              <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/20 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
+                Partners
+              </p>
+              <h2 className="mx-auto mb-4 max-w-[18ch] text-3xl font-bold text-[#212529] md:max-w-none md:text-4xl">
+                Aliados que hacen posible la comunidad
+              </h2>
             </div>
           )}
 
@@ -153,13 +176,22 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
           )}
 
           {partnerCompanies.length > 0 && (
-            <div className="mb-12 md:mb-16 rounded-2xl border border-[#2F4F7A]/20 bg-[#F6F9FF] p-5 sm:p-6">
-            <TierHeader label="Partners" tone="partner" />
-            <div className="flex flex-wrap justify-center gap-4">
-              {partnerCompanies.map((sponsor) => (
-                <SponsorLogo key={sponsor.id} sponsor={sponsor} size="md" />
-              ))}
-            </div>
+            <div className="mb-12 md:mb-16 rounded-2xl border border-[#2F4F7A]/20 bg-white p-8 sm:p-12 flex flex-col items-center">
+              {showPartnerBlockLabel && (
+                <div className="mb-4 flex items-center justify-center">
+                  <p className="inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/25 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
+                    Aliados
+                  </p>
+                </div>
+              )}
+              <div className="flex flex-wrap justify-center gap-8">
+                {partnerCompanies.length === 1
+                  ? <SponsorLogo key={partnerCompanies[0].id} sponsor={partnerCompanies[0]} size="lg" />
+                  : partnerCompanies.map((sponsor) => (
+                      <SponsorLogo key={sponsor.id} sponsor={sponsor} size="lg" />
+                    ))}
+              </div>
             </div>
           )}
 

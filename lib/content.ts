@@ -35,10 +35,23 @@ const sponsorSchema = z.object({
   websiteUrl: z.string(),
   logoUrl: z.string().default(''),
   category: z.enum(['sponsor', 'partner']).optional().default('sponsor'),
-  tier: z.enum(['gold', 'silver', 'bronze']),
+  tier: z.enum(['gold', 'silver', 'bronze']).optional(),
   isActive: z.boolean().default(true),
   sortOrder: z.number(),
-})
+}).refine(
+  (data) => {
+    // Si es sponsor, debe tener tier
+    if ((data.category ?? 'sponsor') === 'sponsor') {
+      return !!data.tier
+    }
+    // Si es partner, no debe tener tier
+    return true
+  },
+  {
+    message: 'Los sponsors deben tener tier definido (gold, silver, bronze)',
+    path: ['tier'],
+  }
+)
 
 const EVENTS_UPCOMING_DIR = path.join(process.cwd(), 'content/events/actuales')
 const EVENTS_PAST_DIR = path.join(process.cwd(), 'content/events/pasados')
