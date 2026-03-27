@@ -47,7 +47,7 @@ export default function MeetTheTeam() {
               </span>
             </div>
             <h3 className="text-xl font-semibold text-[#22385A] mb-1">Jesús Aguirre</h3>
-            <span className="text-sm text-[#495057] mb-2">Líder Organizador</span>
+            <span className="text-sm text-[#495057] mb-2">JUG Líder</span>
             <div className="flex items-center gap-3 mt-2">
               <Link
                 href="https://github.com/aguirre-jes"

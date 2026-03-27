@@ -8,7 +8,7 @@ description: "Arrancamos Panama JUG con una conversación honesta sobre el estad
 #displayDate: "MAY 7, 2026"
 type: "virtual"
 speakerName: "Jesus Aguirre"
-speakerCompany: "Líder Organizador, Panama JUG"
+speakerCompany: "JUG Líder, Panama JUG"
 #time: "8:00 PM UTC-5"
 location: "Virtual / YouTube Live"
 tags: ["Lanzamiento", "Panama JUG", "Java", "Enterprise", "Comunidad"]
