@@ -14,14 +14,14 @@
     "@vercel/speed-insights": "^2.0.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.577.0",
-    "next": "16.2.0",
+    "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.5",
     "resend": "^4.0.1",
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.2.0",
+    "@tailwindcss/postcss": "^4.2.4",
     "@types/node": "^22",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
