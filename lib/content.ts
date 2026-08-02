@@ -34,11 +34,16 @@ const noteSchema = z.object({
   id: z.string(),
   published: z.boolean().optional().default(true),
   title: z.string(),
-  description: z.string(),
-  publicationDate: z.string().optional(),
+  date: z.string().optional(),
   displayDate: z.string().optional(),
+  summary: z.string(),
+  category: z.string(),
+  author: z.string(),
+  references: z.array(z.object({
+    label: z.string(),
+    url: z.string().url(),
+  })).optional().default([]),
   status: z.enum(['coming-soon', 'published']),
-  externalUrl: z.string().url().optional(),
 })
 
 const sponsorSchema = z.object({
@@ -126,6 +131,32 @@ function listMarkdownFiles(folderPath: string): string[] {
     .map((name) => path.join(folderPath, name))
 }
 
+function parseNoteMarkdown(filePath: string): Note | null {
+  try {
+    const source = fs.readFileSync(filePath, 'utf8')
+    const parsed = matter(source)
+    const result = noteSchema.safeParse(parsed.data)
+
+    if (!result.success) {
+      console.warn(
+        `[content] Invalid note frontmatter in ${path.basename(filePath)}: ${result.error.issues
+          .map((issue) => `${issue.path.join('.')} => ${issue.message}`)
+          .join('; ')}`
+      )
+      return null
+    }
+
+    return {
+      ...result.data,
+      content: parsed.content.trim(),
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown parsing error'
+    console.warn(`[content] Failed to parse note ${path.basename(filePath)}: ${message}`)
+    return null
+  }
+}
+
 export function getAllEventsFromMarkdown(): Event[] {
   const files = [
     ...listMarkdownFiles(EVENTS_UPCOMING_DIR),
@@ -185,12 +216,12 @@ export function getSponsorsFromMarkdown(): Sponsor[] {
 
 export function getNotesFromMarkdown(): Note[] {
   return listMarkdownFiles(NOTES_DIR)
-    .map((filePath) => parseMarkdownFrontmatter(filePath, noteSchema))
+    .map((filePath) => parseNoteMarkdown(filePath))
     .filter((note): note is Note => note !== null)
     .filter((note) => note.published !== false)
     .sort((a, b) => {
-      const aTs = getEventTimestamp(a.publicationDate)
-      const bTs = getEventTimestamp(b.publicationDate)
+      const aTs = getEventTimestamp(a.date)
+      const bTs = getEventTimestamp(b.date)
       if (aTs === null && bTs === null) return a.title.localeCompare(b.title, 'es')
       if (aTs === null) return 1
       if (bTs === null) return -1

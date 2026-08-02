@@ -35,14 +35,22 @@ export interface Event {
 
 export type NoteStatus = 'coming-soon' | 'published'
 
+export interface NoteReference {
+  label: string
+  url: string
+}
+
 export interface Note {
   id: string
   title: string
-  description: string
-  publicationDate?: string
+  date?: string
   displayDate?: string
+  summary: string
+  category: string
+  author: string
+  content: string
+  references: NoteReference[]
   status: NoteStatus
-  externalUrl?: string
   published?: boolean
 }
 
@@ -64,7 +72,7 @@ export const navLinks = [
   { href: '/#comunidad', label: 'Comunidad' },
   { href: '/#eventos', label: 'Eventos' },
   { href: '/#notas', label: 'Notas' },
-  { href: '/contactanos', label: 'Participa' },
+  { href: '/unete', label: 'Participa' },
 ]
 
 export const footerLinks = {
@@ -76,7 +84,7 @@ export const footerLinks = {
   ],
   community: [
     { href: '/sobre-jug-panama', label: 'Sobre Panama JUG' },
-    { href: '/contactanos', label: 'Participa en la comunidad' },
+    { href: '/unete', label: 'Participa en la comunidad' },
     { href: '/conviertete-en-sponsor', label: 'Colaboración institucional' },
     { href: '/codigo-de-conducta', label: 'Código de conducta' },
     { href: '/contactanos', label: 'Contáctanos' },

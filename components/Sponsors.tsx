@@ -76,25 +76,12 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
   const bronzeSponsors = sponsorCompanies.filter((s) => s.tier === 'bronze')
   const hasSponsors = sponsorCompanies.length > 0
   const hasPartners = partnerCompanies.length > 0
-  const hasAnyCompanies = hasSponsors || hasPartners
-  // Cabecera y mensaje: si solo hay partners, mostrar cabecera de sponsors
-  let sectionLabel = 'Sponsors'
-  let sectionTitle = 'Empresas que hacen posible la comunidad'
-  let showPartnerBlockLabel = false
-  let showNoSponsorsMessage = false
-  let showPartnersHeaderBelow = false
-
-  if (hasSponsors && hasPartners) {
-    sectionLabel = 'Sponsors & Partners'
-    sectionTitle = 'Empresas y aliados que hacen posible la comunidad'
-    showPartnerBlockLabel = true
-  } else if (hasPartners && !hasSponsors) {
-    sectionLabel = 'Sponsors'
-    sectionTitle = 'Empresas que hacen posible la comunidad'
-    showPartnerBlockLabel = false
-    showNoSponsorsMessage = true
-    showPartnersHeaderBelow = true
-  }
+  const sectionLabel = hasSponsors ? (hasPartners ? 'Sponsors y partners' : 'Sponsors') : 'Partners'
+  const sectionTitle = hasSponsors
+    ? hasPartners
+      ? 'Organizaciones que apoyan a la comunidad'
+      : 'Empresas que apoyan a la comunidad'
+    : 'Aliados de la comunidad'
   const [headerRef, headerInView] = useInView()
   const [tiersRef, tiersInView] = useInView()
   const [ctaRef, ctaInView] = useInView()
@@ -121,27 +108,6 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
           ref={tiersRef}
           className={`transition-all duration-1000 ease-out ${tiersInView ? 'opacity-100' : 'opacity-0'}`}
         >
-          {(!hasAnyCompanies || showNoSponsorsMessage) && (
-            <div className="mb-12 md:mb-16 rounded-2xl border border-dashed border-[#CED4DA] bg-[#F8F9FA] p-8 text-center">
-              <p className="font-semibold text-[#212529] mb-2">Sponsors próximamente</p>
-              <p className="text-sm text-[#6C757D] max-w-2xl mx-auto">
-                Estamos abriendo nuevos espacios de colaboración. Muy pronto publicaremos aquí las marcas que acompañan a Panama JUG.
-              </p>
-            </div>
-          )}
-
-          {showPartnersHeaderBelow && (
-            <div className="mb-12 md:mb-16 text-center">
-              <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/20 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
-                Partners
-              </p>
-              <h2 className="mx-auto mb-4 max-w-[18ch] text-3xl font-bold text-[#212529] md:max-w-none md:text-4xl">
-                Aliados que hacen posible la comunidad
-              </h2>
-            </div>
-          )}
-
           {goldSponsors.length > 0 && (
             <div className="mb-6 rounded-2xl border border-[#F89820]/20 bg-[#FFF8EF] p-5 sm:p-6">
               <TierHeader label="Gold" tone="gold" />
@@ -177,14 +143,7 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
 
           {partnerCompanies.length > 0 && (
             <div className="mb-12 md:mb-16 rounded-2xl border border-[#2F4F7A]/20 bg-white p-8 sm:p-12 flex flex-col items-center">
-              {showPartnerBlockLabel && (
-                <div className="mb-4 flex items-center justify-center">
-                  <p className="inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/25 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
-                    Aliados
-                  </p>
-                </div>
-              )}
+              {hasSponsors && <TierHeader label="Partners" tone="partner" />}
               <div className="flex flex-wrap justify-center gap-8">
                 {partnerCompanies.length === 1
                   ? <SponsorLogo key={partnerCompanies[0].id} sponsor={partnerCompanies[0]} size="lg" />
@@ -197,40 +156,37 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
 
         </div>{/* end tiers */}
 
-        {/* CTA Card */}
-        <div
-          ref={ctaRef}
-          className={`relative overflow-hidden rounded-2xl border border-[#2F4F7A]/20 bg-[radial-gradient(circle_at_top_right,_#3A5F91_0%,_#2F4F7A_45%,_#22385A_100%)] p-6 sm:p-8 md:p-10 transition-all duration-700 ease-out ${ctaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        >
-          <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[#F89820]/20 blur-2xl" />
-          <div className="relative grid gap-6 md:grid-cols-[1.6fr_auto] md:items-center">
-            <div>
-              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#F89820]/35 bg-[#F89820]/10 px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFD8A6]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
-                Programa de sponsors 2026
-              </p>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                ¿Tu empresa quiere ser sponsor de Panama JUG?
-              </h3>
-              <p className="text-[#D7E1EE] text-sm md:text-base max-w-2xl">
-                Conecta tu marca con la comunidad Java local a través de eventos técnicos, contenido y networking de alto valor.
-              </p>
-            </div>
-            <div className="md:justify-self-end">
-              <a
-                href="/conviertete-en-sponsor"
-                aria-label="Ir a la página para convertirse en sponsor de Panama JUG"
-                className="focus-ring tap-target inline-flex items-center justify-center gap-2 rounded-lg bg-[#F89820] px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
-              >
-                Quiero ser sponsor
-                <ArrowRight className="h-4 w-4" />
-              </a>
-              <p className="mt-3 text-xs font-mono text-[#B8C6DA] text-center md:text-right">
-                Cada propuesta se revisa de forma individual
-              </p>
+        {hasSponsors && (
+          <div
+            ref={ctaRef}
+            className={`relative overflow-hidden rounded-2xl border border-[#2F4F7A]/20 bg-[radial-gradient(circle_at_top_right,_#3A5F91_0%,_#2F4F7A_45%,_#22385A_100%)] p-6 sm:p-8 md:p-10 transition-all duration-700 ease-out ${ctaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[#F89820]/20 blur-2xl" />
+            <div className="relative grid gap-6 md:grid-cols-[1.6fr_auto] md:items-center">
+              <div>
+                <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#F89820]/35 bg-[#F89820]/10 px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFD8A6]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
+                  Colaboración institucional
+                </p>
+                <h3 className="mb-2 text-2xl font-bold text-white md:text-3xl">
+                  Apoyo responsable para el crecimiento de la comunidad
+                </h3>
+                <p className="max-w-2xl text-sm text-[#D7E1EE] md:text-base">
+                  Cada colaboración se evalúa de acuerdo con las necesidades reales de Panama JUG.
+                </p>
+              </div>
+              <div className="md:justify-self-end">
+                <a
+                  href="/conviertete-en-sponsor"
+                  className="focus-ring tap-target inline-flex items-center justify-center gap-2 rounded-lg bg-[#F89820] px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
+                >
+                  Conocer cómo colaborar
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   )

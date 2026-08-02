@@ -67,7 +67,7 @@ export default function About() {
               Conoce más <span aria-hidden="true" className="ml-1">→</span>
             </Link>
             <Link
-              href="/contactanos"
+              href="/unete"
               className="focus-ring mt-6 ml-5 inline-flex items-center rounded-md font-medium text-[#2F4F7A] hover:text-[#22385A]"
             >
               Participa <span aria-hidden="true" className="ml-1">→</span>

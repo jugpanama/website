@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowUpRight, BookOpen, CalendarDays } from 'lucide-react'
+import { ArrowUpRight, BookOpen, CalendarDays, UserRound } from 'lucide-react'
 import type { Note } from '@/lib/data'
 import { useInView } from '@/hooks/use-in-view'
 
@@ -29,7 +29,7 @@ export default function Notes({ notes }: { notes: Note[] }) {
 
         <div ref={cardsRef} className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {notes.map((note, index) => {
-            const isAvailable = note.status === 'published' && !!note.externalUrl
+            const isAvailable = note.status === 'published' && note.references.length > 0
 
             return (
               <article
@@ -39,7 +39,7 @@ export default function Notes({ notes }: { notes: Note[] }) {
               >
                 <div className="mb-6 flex items-start justify-between gap-4">
                   <span className="inline-flex rounded-md bg-[#22385A] px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-white">
-                    Nota técnica
+                    {note.category}
                   </span>
                   <span className="rounded-full border border-[#F89820]/35 bg-[#F89820]/10 px-2.5 py-1 text-xs font-semibold text-[#9A4F00]">
                     {note.status === 'coming-soon' ? 'Próximamente' : 'Publicada'}
@@ -47,21 +47,25 @@ export default function Notes({ notes }: { notes: Note[] }) {
                 </div>
 
                 <h3 className="mb-3 text-xl font-bold text-[#212529]">{note.title}</h3>
-                <p className="mb-6 text-sm leading-relaxed text-[#495057]">{note.description}</p>
+                <p className="mb-5 text-sm leading-relaxed text-[#495057]">{note.summary}</p>
+                <p className="mb-6 inline-flex items-center gap-2 text-xs font-medium text-[#6C757D]">
+                  <UserRound className="h-3.5 w-3.5" />
+                  {note.author}
+                </p>
 
                 <div className="mt-auto border-t border-[#DCE3EC] pt-4">
                   <p className="mb-3 inline-flex items-center gap-2 font-mono text-xs text-[#6C757D]">
                     <CalendarDays className="h-3.5 w-3.5" />
-                    {note.displayDate ?? 'Fecha de publicación por confirmar'}
+                    {note.displayDate ?? note.date ?? 'Fecha de publicación por confirmar'}
                   </p>
                   {isAvailable ? (
                     <a
-                      href={note.externalUrl}
+                      href={note.references[0].url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="focus-ring inline-flex items-center gap-1.5 rounded-md text-sm font-semibold text-[#2F4F7A] hover:text-[#22385A]"
                     >
-                      Leer nota <ArrowUpRight className="h-4 w-4" />
+                      Consultar referencia <ArrowUpRight className="h-4 w-4" />
                     </a>
                   ) : (
                     <p className="text-sm text-[#6C757D]">Compartiremos el enlace cuando la nota esté lista.</p>

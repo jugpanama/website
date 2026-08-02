@@ -61,7 +61,7 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
               Próximamente compartiremos encuentros técnicos y contenido de la comunidad. Publicaremos cada actividad cuando sus detalles estén confirmados.
             </p>
             <Link
-              href="/contactanos"
+              href="/unete"
               className="focus-ring-inverse inline-flex items-center justify-center rounded bg-[#F89820] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
             >
               Proponer un tema o participar
