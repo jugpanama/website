@@ -62,7 +62,7 @@ export default function MeetTheTeam() {
                 <Github className="h-6 w-6" />
               </Link>
               <Link
-                href="https://www.linkedin.com/in/info-aguirre-jesus/"
+                href="https://www.linkedin.com/in/jesusaguirre-sa/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn de Jesús Aguirre"
