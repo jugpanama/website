@@ -62,7 +62,7 @@ export default function ContactanosPage() {
           </p>
         </section>
 
-        <section className="mx-auto max-w-4xl mt-10 bg-white rounded-2xl border border-[#E9ECEF] p-6 md:p-8">
+        <section id="formulario-contacto" className="mx-auto max-w-4xl mt-10 bg-white rounded-2xl border border-[#E9ECEF] p-6 md:p-8">
           {sent ? (
             <div className="py-8 text-center" aria-live="polite">
               <h2 className="mb-2 text-2xl font-bold text-[#212529]">Recibimos tu mensaje</h2>
@@ -144,13 +144,12 @@ export default function ContactanosPage() {
                 />
               </div>
               <div className="md:col-span-2">
-                <label htmlFor="topic" className="block text-sm font-medium text-[#212529] mb-1.5">Categoría</label>
+                <label htmlFor="topic" className="block text-sm font-medium text-[#212529] mb-1.5">Motivo del contacto</label>
                 <select id="topic" name="topic" required className="form-field tap-target">
-                  <option>Sugerencia</option>
-                  <option>Propuesta de tema</option>
-                  <option>Participación comunitaria</option>
-                  <option>Comunicaciones</option>
-                  <option>Alianzas</option>
+                  <option>Quiero asistir a actividades</option>
+                  <option>Quiero proponer una charla</option>
+                  <option>Quiero colaborar con Panama JUG</option>
+                  <option>Quiero conocer opciones de colaboración institucional</option>
                   <option>Otro</option>
                 </select>
               </div>

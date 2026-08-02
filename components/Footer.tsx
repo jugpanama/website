@@ -10,7 +10,7 @@ const socialLinks = [
   { icon: GitHubIcon, href: 'https://github.com/jugpanama', label: 'GitHub', target: '_blank', rel: 'noopener noreferrer' },
   { icon: Linkedin, href: 'https://linkedin.com/company/jugpanama', label: 'LinkedIn', target: '_blank', rel: 'noopener noreferrer' },
   { icon: Youtube, href: 'https://youtube.com/@jugpanama', label: 'YouTube', target: '_blank', rel: 'noopener noreferrer' },
-  { icon: Twitter, href: 'https://twitter.com/panamajug', label: 'Twitter', target: '_blank', rel: 'noopener noreferrer' },
+  { icon: Twitter, href: 'https://x.com/panamajug', label: 'X', target: '_blank', rel: 'noopener noreferrer' },
 ]
 
 export default function Footer({ nextEvent = null }: { nextEvent?: Event | null }) {
