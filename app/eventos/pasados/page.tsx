@@ -45,9 +45,9 @@ export default function EventosPasadosPage() {
 
           {pastEvents.length === 0 && (
             <div className="rounded-2xl border border-dashed border-[#CED4DA] bg-white p-8 text-center">
-              <h2 className="text-xl font-bold text-[#212529] mb-2">Aún no hay eventos archivados</h2>
+              <h2 className="text-xl font-bold text-[#212529] mb-2">Estamos preparando nuestras primeras actividades comunitarias</h2>
               <p className="mx-auto max-w-2xl text-sm text-[#6C757D] mb-6">
-                Cuando publiquemos grabaciones o movamos sesiones al historial, aparecerán aquí con sus detalles y enlaces disponibles.
+                Próximamente compartiremos encuentros técnicos y contenido de la comunidad. Sus resúmenes y grabaciones aparecerán aquí cuando estén disponibles.
               </p>
               <Link
                 href="/eventos/proximos"
@@ -81,7 +81,7 @@ export default function EventosPasadosPage() {
 
                   <h2 className="mb-2 text-lg font-semibold leading-snug text-[#212529] line-clamp-2">{event.title}</h2>
 
-                  <p className="mb-4 text-sm leading-relaxed text-[#6C757D] line-clamp-3">{event.description}</p>
+                  <p className="mb-4 text-sm leading-relaxed text-[#6C757D] line-clamp-3">{event.summary ?? event.description}</p>
 
                   <div className="mb-4 space-y-2 text-sm text-[#6C757D]">
                     <p className="flex items-center gap-2">
