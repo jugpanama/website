@@ -9,7 +9,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@radix-ui/react-tooltip": "1.2.8",
+    "@radix-ui/react-tooltip": "1.2.16",
     "@vercel/analytics": "^1.6.1",
     "@vercel/speed-insights": "^2.0.0",
     "gray-matter": "^4.0.3",
