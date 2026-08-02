@@ -12,19 +12,19 @@ const aboutHighlights = [
     icon: Target,
     title: 'Misión',
     description:
-      'Fortalecer el ecosistema Java local con experiencias prácticas, charlas de calidad y una comunidad inclusiva para todos los niveles.',
+      'Fortalecer el ecosistema Java local con contenido útil, colaboración y una comunidad inclusiva para todos los niveles.',
   },
   {
     icon: Presentation,
     title: 'Qué hacemos',
     description:
-      'Meetups mensuales, sesiones virtuales y eventos presenciales con speakers de industria, casos reales y enfoque hands-on.',
+      'Preparamos contenido y futuras actividades sobre Java, JVM, Jakarta EE, Cloud Native y Open Source.',
   },
   {
     icon: Handshake,
     title: 'Cómo participar',
     description:
-      'Puedes asistir a eventos, proponer charlas, apoyar como sponsor o colaborar en la organización de actividades.',
+      'Puedes proponer un tema, compartir experiencia técnica, asistir a futuras actividades o ayudar a organizarlas.',
   },
 ]
 
@@ -46,8 +46,8 @@ export default function SobreJugPanamaPage() {
           </h1>
           <p className="text-[#495057] text-base md:text-lg leading-relaxed max-w-3xl">
             Panama JUG es una comunidad abierta para desarrolladores Java y JVM en Panamá y
-            Latinoamérica. Organizamos meetups, talleres y espacios de networking para impulsar
-            habilidades técnicas, colaboración y oportunidades profesionales.
+            Latinoamérica. Compartimos conocimiento técnico y construimos, paso a paso, espacios
+            para aprender, colaborar y fortalecer el ecosistema local.
           </p>
         </section>
 
@@ -68,7 +68,7 @@ export default function SobreJugPanamaPage() {
         <section className="mx-auto max-w-5xl mt-12">
           <div className="flex items-center justify-between gap-3 mb-4">
             <h2 className="text-xl md:text-2xl font-bold text-[#212529]">Galería de meetups</h2>
-            <span className="text-xs font-mono text-[#6C757D]">Espacio listo para futuras fotos</span>
+            <span className="text-xs font-mono text-[#6C757D]">Próximamente</span>
           </div>
 
           {meetupGallery.length > 0 ? (
@@ -81,15 +81,8 @@ export default function SobreJugPanamaPage() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="h-36 md:h-44 rounded-lg border border-dashed border-[#B8C6DA] bg-white/70 flex items-center justify-center text-center px-3"
-                >
-                  <p className="text-xs text-[#6C757D]">Próximamente foto del meetup presencial</p>
-                </div>
-              ))}
+            <div className="rounded-xl border border-dashed border-[#B8C6DA] bg-white/70 px-6 py-10 text-center">
+              <p className="text-sm text-[#6C757D]">Documentaremos aquí las actividades de la comunidad cuando comiencen a realizarse.</p>
             </div>
           )}
         </section>
@@ -99,7 +92,7 @@ export default function SobreJugPanamaPage() {
             href="/eventos/proximos"
             className="inline-flex items-center justify-center rounded bg-[#F89820] px-6 py-3 text-sm font-semibold text-white hover:bg-[#DD7A0A] transition-colors"
           >
-            Ver agenda
+            Conocer las actividades en preparación
           </Link>
         </section>
       </main>
