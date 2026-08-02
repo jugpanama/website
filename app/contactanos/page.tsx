@@ -58,7 +58,7 @@ export default function ContactanosPage() {
             Contáctanos
           </h1>
           <p className="text-[#495057] text-base md:text-lg leading-relaxed max-w-3xl">
-            Este formulario está pensado para sugerencias, comunicaciones, alianzas y colaboraciones.
+            Propón un tema, comparte una idea técnica o cuéntanos cómo te gustaría participar en la comunidad.
           </p>
         </section>
 
@@ -66,7 +66,7 @@ export default function ContactanosPage() {
           {sent ? (
             <div className="py-8 text-center" aria-live="polite">
               <h2 className="mb-2 text-2xl font-bold text-[#212529]">Recibimos tu mensaje</h2>
-              <p className="mb-6 text-[#6C757D]">Gracias por escribirnos. Te responderemos por correo en 24-48 horas.</p>
+              <p className="mb-6 text-[#6C757D]">Gracias por escribirnos. Revisaremos tu mensaje y responderemos por correo.</p>
               <Link href="/" className="focus-ring tap-target inline-flex rounded bg-[#F89820] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]">
                 Volver al inicio
               </Link>
@@ -147,6 +147,8 @@ export default function ContactanosPage() {
                 <label htmlFor="topic" className="block text-sm font-medium text-[#212529] mb-1.5">Categoría</label>
                 <select id="topic" name="topic" required className="form-field tap-target">
                   <option>Sugerencia</option>
+                  <option>Propuesta de tema</option>
+                  <option>Participación comunitaria</option>
                   <option>Comunicaciones</option>
                   <option>Alianzas</option>
                   <option>Otro</option>
@@ -192,7 +194,7 @@ export default function ContactanosPage() {
                 </div>
               )}
               <div className="md:col-span-2 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between pt-1">
-                <p className="text-xs text-[#6C757D]">Usaremos este correo solo para responder tu mensaje. Tiempo estimado de respuesta: 24-48 horas.</p>
+                <p className="text-xs text-[#6C757D]">Usaremos este correo únicamente para responder tu mensaje.</p>
                 <button
                   type="submit"
                   disabled={isSending}

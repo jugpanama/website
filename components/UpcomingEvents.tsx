@@ -56,15 +56,15 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
 
         {upcomingEvents.length === 0 && (
           <div className="rounded-2xl border border-dashed border-white/25 bg-[#22385A]/45 p-8 text-center">
-            <h3 className="text-xl font-bold text-white mb-2">Aún no hay sesiones próximas publicadas</h3>
+            <h3 className="text-xl font-bold text-white mb-2">Estamos preparando las próximas actividades</h3>
             <p className="mx-auto max-w-2xl text-sm text-[#D7E1EE] mb-6">
-              Cuando publiquen el siguiente evento en Markdown, aparecerá automáticamente aquí.
+              Próximamente compartiremos encuentros técnicos y contenido de la comunidad. Publicaremos cada actividad cuando sus detalles estén confirmados.
             </p>
             <Link
               href="/contactanos"
               className="focus-ring-inverse inline-flex items-center justify-center rounded bg-[#F89820] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
             >
-              Contactar al equipo
+              Proponer un tema o participar
             </Link>
           </div>
         )}
