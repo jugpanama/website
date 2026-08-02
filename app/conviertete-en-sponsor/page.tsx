@@ -12,18 +12,18 @@ import { useInView } from '@/hooks/use-in-view'
 const sponsorBenefits = [
   {
     icon: Megaphone,
-    title: 'Visibilidad de marca',
-    description: 'Presencia en eventos, comunicaciones y espacios de networking.',
+    title: 'Contenido técnico',
+    description: 'Apoyo a materiales y actividades con valor para la comunidad.',
   },
   {
     icon: Users,
-    title: 'Conexión con talento',
-    description: 'Interacción directa con perfiles técnicos de Java y backend.',
+    title: 'Colaboración responsable',
+    description: 'Acuerdos claros, proporcionales y compatibles con la independencia del grupo.',
   },
   {
     icon: Sparkles,
-    title: 'Impacto en comunidad',
-    description: 'Apoyo tangible al crecimiento tecnológico de Panamá.',
+    title: 'Crecimiento sostenible',
+    description: 'Recursos que ayuden a desarrollar la comunidad de manera progresiva.',
   },
 ]
 
@@ -73,14 +73,14 @@ export default function ConvierteteEnSponsorPage() {
         <section className="mx-auto max-w-5xl">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/25 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
-            Programa de sponsors
+            Colaboración institucional
           </p>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#212529] mb-4">
-            Conviértete en sponsor de JUG Panama
+            Apoya el desarrollo de Panama JUG
           </h1>
           <p className="text-[#495057] text-base md:text-lg leading-relaxed max-w-3xl">
-            Ayuda a impulsar el ecosistema Java local y conecta tu marca con una comunidad técnica
-            activa de desarrolladores, equipos de ingeniería y líderes de tecnología.
+            Estamos construyendo la comunidad de forma progresiva. Si tu organización comparte
+            este propósito, podemos conversar sobre una colaboración concreta y transparente.
           </p>
         </section>
 
@@ -102,15 +102,15 @@ export default function ConvierteteEnSponsorPage() {
           {submitted ? (
             <div className="py-8 text-center" aria-live="polite">
               <h2 className="mb-2 text-2xl font-bold text-[#212529]">Recibimos tu solicitud</h2>
-              <p className="mb-6 text-[#6C757D]">Gracias por escribirnos. Te responderemos por correo en 24-48 horas.</p>
+              <p className="mb-6 text-[#6C757D]">Gracias por escribirnos. Revisaremos la propuesta y responderemos por correo.</p>
               <Link href="/" className="focus-ring tap-target inline-flex rounded bg-[#F89820] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]">
                 Volver al inicio
               </Link>
             </div>
           ) : (
             <>
-              <h2 className="text-xl font-bold text-[#212529] mb-1">Formulario de sponsor</h2>
-              <p className="text-sm text-[#6C757D] mb-6">Completa este formulario y te responderemos por correo en 24-48 horas.</p>
+              <h2 className="text-xl font-bold text-[#212529] mb-1">Propuesta de colaboración</h2>
+              <p className="text-sm text-[#6C757D] mb-6">Cuéntanos qué apoyo concreto propone tu organización.</p>
 
               <form
                 className="grid gap-5 md:grid-cols-2"
@@ -214,8 +214,8 @@ export default function ConvierteteEnSponsorPage() {
                 <div className="md:col-span-2">
                   <label htmlFor="interest" className="block text-sm font-medium text-[#212529] mb-1.5">Tipo de interés</label>
                   <select id="interest" name="interest" required className="form-field tap-target">
-                    <option>Patrocinio anual</option>
-                    <option>Patrocinio por evento</option>
+                    <option>Apoyo a una actividad</option>
+                    <option>Apoyo operativo</option>
                     <option>Alianza de contenido</option>
                     <option>Otro</option>
                   </select>

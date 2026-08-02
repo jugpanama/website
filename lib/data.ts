@@ -1,5 +1,5 @@
 // Panama JUG — Shared Types and Navigation
-// Events and sponsors content now comes from Markdown via lib/content.ts.
+// Events, notes and sponsors content comes from Markdown via lib/content.ts.
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -12,6 +12,7 @@ export interface Event {
   id: string
   title: string
   description: string
+  summary?: string
   date?: string
   displayDate?: string
   type: EventType
@@ -32,6 +33,19 @@ export interface Event {
   published?: boolean
 }
 
+export type NoteStatus = 'coming-soon' | 'published'
+
+export interface Note {
+  id: string
+  title: string
+  description: string
+  publicationDate?: string
+  displayDate?: string
+  status: NoteStatus
+  externalUrl?: string
+  published?: boolean
+}
+
 export interface Sponsor {
   id: string
   name: string
@@ -49,7 +63,8 @@ export const navLinks = [
   { href: '/#inicio', label: 'Inicio' },
   { href: '/#comunidad', label: 'Comunidad' },
   { href: '/#eventos', label: 'Eventos' },
-  { href: '/#sponsors', label: 'Sponsors' },
+  { href: '/#notas', label: 'Notas' },
+  { href: '/contactanos', label: 'Participa' },
 ]
 
 export const footerLinks = {
@@ -57,11 +72,12 @@ export const footerLinks = {
     { href: '/#inicio', label: 'Inicio' },
     { href: '/#comunidad', label: 'Comunidad' },
     { href: '/#eventos', label: 'Eventos' },
-    { href: '/#sponsors', label: 'Sponsors' },
+    { href: '/#notas', label: 'Panama JUG Notes' },
   ],
   community: [
     { href: '/sobre-jug-panama', label: 'Sobre Panama JUG' },
-    { href: '/conviertete-en-sponsor', label: 'Conviértete en sponsor' },
+    { href: '/contactanos', label: 'Participa en la comunidad' },
+    { href: '/conviertete-en-sponsor', label: 'Colaboración institucional' },
     { href: '/codigo-de-conducta', label: 'Código de conducta' },
     { href: '/contactanos', label: 'Contáctanos' },
   ],

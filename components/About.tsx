@@ -1,33 +1,33 @@
 'use client'
 
-import { Zap, GraduationCap, Globe, Users } from 'lucide-react'
+import { BookOpen, CalendarClock, MessagesSquare, Users } from 'lucide-react'
 import Link from 'next/link'
 import { useInView } from '@/hooks/use-in-view'
 
 const features = [
   {
-    icon: Zap,
-    title: 'Charlas técnicas',
-    description: 'Speakers locales e internacionales',
+    icon: BookOpen,
+    title: 'Contenido técnico',
+    description: 'Ideas prácticas sobre Java y su ecosistema',
   },
   {
-    icon: GraduationCap,
-    title: 'Talleres',
-    description: 'Formación práctica y hands-on',
+    icon: CalendarClock,
+    title: 'Actividades en preparación',
+    description: 'Encuentros sostenibles, anunciados cuando estén confirmados',
   },
   {
-    icon: Globe,
-    title: 'Comunidad virtual',
-    description: 'Eventos online accesibles',
+    icon: MessagesSquare,
+    title: 'Conversaciones abiertas',
+    description: 'Espacios para compartir experiencias y propuestas',
   },
   {
     icon: Users,
-    title: 'Networking',
-    description: 'Conecta con la industria tech',
+    title: 'Participación progresiva',
+    description: 'Una comunidad que crece con aportes reales',
   },
 ]
 
-const pills = ['☕ Java & JVM', '🌐 Cloud Native', '🤝 Open Source']
+const pills = ['☕ Java & JVM', '🌐 Jakarta EE', '☁️ Cloud Native', '🤝 Open Source']
 
 export default function About() {
   const [leftRef, leftInView] = useInView()
@@ -46,10 +46,9 @@ export default function About() {
               Una comunidad construida por y para desarrolladores
             </h2>
             <p className="mb-8 max-w-2xl text-base leading-relaxed text-[#495057] md:text-lg">
-              Panama JUG es un grupo de usuarios Java independiente, sin fines de lucro,
-              dedicado a promover el ecosistema Java y JVM en Panamá. Organizamos eventos
-              técnicos, charlas, talleres y conferencias para que los desarrolladores
-              locales puedan aprender, conectar y crecer profesionalmente.
+              Panama JUG es un grupo de usuarios independiente dedicado al ecosistema Java y
+              JVM en Panamá. Compartimos contenido técnico y preparamos espacios comunitarios
+              para aprender, intercambiar experiencias y colaborar a un ritmo sostenible.
             </p>
             <div className="flex flex-wrap gap-3">
               {pills.map((pill) => (
@@ -66,6 +65,12 @@ export default function About() {
               className="focus-ring mt-6 inline-flex items-center rounded-md font-medium text-[#2F4F7A] hover:text-[#22385A]"
             >
               Conoce más <span aria-hidden="true" className="ml-1">→</span>
+            </Link>
+            <Link
+              href="/contactanos"
+              className="focus-ring mt-6 ml-5 inline-flex items-center rounded-md font-medium text-[#2F4F7A] hover:text-[#22385A]"
+            >
+              Participa <span aria-hidden="true" className="ml-1">→</span>
             </Link>
           </div>
 

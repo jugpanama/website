@@ -226,7 +226,7 @@ export default function Sponsors({ sponsors }: { sponsors: Sponsor[] }) {
                 <ArrowRight className="h-4 w-4" />
               </a>
               <p className="mt-3 text-xs font-mono text-[#B8C6DA] text-center md:text-right">
-                Respuesta en 24-48 horas
+                Cada propuesta se revisa de forma individual
               </p>
             </div>
           </div>
