@@ -72,9 +72,9 @@ export default function EventosProximosPage() {
 
           {upcomingEvents.length === 0 && (
             <div className="rounded-2xl border border-dashed border-[#CED4DA] bg-white p-8 text-center">
-              <h2 className="text-xl font-bold text-[#212529] mb-2">No hay eventos abiertos en este momento</h2>
+              <h2 className="text-xl font-bold text-[#212529] mb-2">Estamos preparando las próximas actividades</h2>
               <p className="mx-auto max-w-2xl text-sm text-[#6C757D] mb-6">
-                Cuando publiquemos nuevos meetups aparecerán aquí con su registro y detalles de participación.
+                Próximamente compartiremos encuentros técnicos y contenido de la comunidad. Cada actividad aparecerá aquí cuando su fecha y detalles estén confirmados.
               </p>
               <Link
                 href="/"

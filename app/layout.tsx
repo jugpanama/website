@@ -20,8 +20,12 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://panamajug.org'),
-  title: 'Panama JUG',
-  description: 'Panama JUG es la comunidad Java y JVM de Panamá: meetups, talleres, charlas técnicas y networking para desarrolladores y equipos de ingeniería.',
+  title: {
+    default: 'Panama JUG | Comunidad Java en Panamá',
+    template: '%s | Panama JUG',
+  },
+  description: 'Panama JUG es la comunidad técnica de Java y JVM en Panamá. Compartimos contenido sobre Java, Jakarta EE, Cloud Native y Open Source, y preparamos futuras actividades comunitarias.',
+  keywords: ['Java Panamá', 'Java User Group Panamá', 'Panama JUG', 'Jakarta EE', 'JVM', 'Cloud Native', 'Open Source'],
   alternates: {
     canonical: '/',
   },
@@ -30,22 +34,22 @@ export const metadata: Metadata = {
     locale: 'es_PA',
     url: 'https://panamajug.org',
     siteName: 'Panama JUG',
-    title: 'Panama JUG',
-    description: 'Panama JUG es la comunidad Java y JVM de Panamá: meetups, talleres, charlas técnicas y networking para desarrolladores y equipos de ingeniería.',
+    title: 'Panama JUG | Comunidad Java en Panamá',
+    description: 'Comunidad técnica de Java y JVM en Panamá, con contenido sobre Jakarta EE, Cloud Native y Open Source.',
     images: [
       {
-        url: 'https://panamajug.org/portada-web-social.png',
+        url: 'https://panamajug.org/og.png',
         width: 1200,
         height: 630,
-        alt: 'Portada Panama JUG',
+        alt: 'Panama JUG, comunidad técnica de Java, JVM, Jakarta EE y Cloud Native en Panamá',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Panama JUG',
-    description: 'Panama JUG es la comunidad Java y JVM de Panamá: meetups, talleres, charlas técnicas y networking para desarrolladores y equipos de ingeniería.',
-    images: ['https://panamajug.org/portada-web-social.png'],
+    title: 'Panama JUG | Comunidad Java en Panamá',
+    description: 'Comunidad técnica de Java y JVM en Panamá, con contenido sobre Jakarta EE, Cloud Native y Open Source.',
+    images: ['https://panamajug.org/og.png'],
   },
   icons: {
     icon: [{ url: '/jugpanlogo.png', type: 'image/png' }],

@@ -47,9 +47,9 @@ export default function PastEvents({
 
         {pastEvents.length === 0 && (
           <div className="rounded-2xl border border-dashed border-[#CED4DA] bg-white p-8 text-center">
-            <h3 className="text-xl font-bold text-[#212529] mb-2">Aún no tenemos eventos pasados</h3>
+            <h3 className="text-xl font-bold text-[#212529] mb-2">Estamos preparando nuestras primeras actividades comunitarias</h3>
             <p className="mx-auto max-w-2xl text-sm text-[#6C757D] mb-6">
-              Cuando terminemos nuestro primer meetup, lo publicaremos aquí con su resumen y grabación.
+              Próximamente compartiremos encuentros técnicos y contenido de la comunidad. Después de cada actividad publicaremos aquí su resumen y grabación, cuando estén disponibles.
             </p>
             <Link
               href="/eventos/proximos"
@@ -92,7 +92,7 @@ export default function PastEvents({
 
                 {/* Description */}
                 <p className="text-sm text-[#6C757D] mb-4 line-clamp-2">
-                  {event.description}
+                  {event.summary ?? event.description}
                 </p>
 
                 {/* Tags */}
