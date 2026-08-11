@@ -22,6 +22,11 @@ takeaways:
   - "La compatibilidad también puede ser una decisión de diseño."
   - "Java es más que el lenguaje: JVM, ecosistema y comunidad."
 figures:
+  - caption: "Una plataforma tecnológica puede evolucionar mediante múltiples capas y conexiones sin reemplazar completamente aquello sobre lo que fue construida."
+    attribution: "Foto: Conny Schneider / Unsplash"
+    attributionUrl: "https://unsplash.com/photos/xuTJZ7uD7PI?utm_source=panama_jug&utm_medium=referral"
+    width: 1600
+    height: 850
   - caption: "Evolución gradual de Java: nuevas capacidades entran en la plataforma mientras la compatibilidad permite una adopción progresiva."
     attribution: "Diagrama: Panama JUG"
 published: true
@@ -46,6 +51,8 @@ Cuando una tecnología supera las tres décadas, es fácil atribuir su permanenc
 **¿Cómo puede una plataforma cambiar durante tanto tiempo sin dejar de ser reconocible?**
 
 El Java actual incorpora ideas que no existían en sus primeras versiones: generics, lambdas, módulos, records, pattern matching, virtual threads y numerosos cambios internos en la JVM. Aun así, esa evolución ha ocurrido intentando conservar una propiedad particularmente importante: la compatibilidad. No siempre es perfecta ni significa que actualizar sea automático; significa que evolucionar no parte necesariamente de asumir que todo lo anterior debe desaparecer.
+
+![Red abstracta azul formada por líneas y nodos interconectados que representa una plataforma tecnológica en evolución.](/notas/java-no-sobrevivio-por-quedarse-igual/evolucion-plataforma.webp)
 
 ```mermaid
 flowchart LR

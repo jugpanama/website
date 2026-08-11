@@ -9,7 +9,15 @@ function FigureCaption({ number, figure }: { number: number; figure?: NoteFigure
   return (
     <span className="note-figure-caption">
       {figure.caption && <span><strong>Figura {number}.</strong> {figure.caption}</span>}
-      {figure.attribution && <span className="note-figure-attribution">{figure.attribution}</span>}
+      {figure.attribution && (
+        <span className="note-figure-attribution">
+          {figure.attributionUrl ? (
+            <a href={figure.attributionUrl} target="_blank" rel="noopener noreferrer">
+              {figure.attribution}
+            </a>
+          ) : figure.attribution}
+        </span>
+      )}
     </span>
   )
 }
@@ -42,7 +50,15 @@ export default function NoteContent({ content, figures = [] }: { content: string
       const { number, figure } = nextFigure()
       return (
         <span className="note-figure">
-          <img src={src} alt={alt} loading="lazy" decoding="async" {...props} />
+          <img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            {...props}
+            width={figure?.width}
+            height={figure?.height}
+          />
           <FigureCaption number={number} figure={figure} />
         </span>
       )

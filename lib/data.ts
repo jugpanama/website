@@ -59,6 +59,9 @@ export interface NoteAuthor {
 export interface NoteFigure {
   caption?: string
   attribution?: string
+  attributionUrl?: string
+  width?: number
+  height?: number
 }
 
 export interface Note {

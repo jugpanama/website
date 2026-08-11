@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import AboutNoteAuthor from '@/components/AboutNoteAuthor'
 import NoteContent from '@/components/NoteContent'
+import ShareNote from '@/components/ShareNote'
 import { NoteThemeControls, NoteThemeProvider } from '@/components/NoteTheme'
 import YouTubeEmbed from '@/components/YouTubeEmbed'
 import { getNoteBySlug, getNotesFromMarkdown, getUpcomingEventsFromMarkdown } from '@/lib/content'
@@ -125,6 +126,8 @@ export default async function NotePage({ params }: NotePageProps) {
 
             <div className="note-article-body mx-auto max-w-3xl px-4 py-10 md:py-14">
               <NoteContent content={note.content} figures={note.figures} />
+
+              <ShareNote title={note.title} url={url} />
 
               {note.youtube && (
                 <section aria-labelledby="note-video-title" className="note-closing-section">

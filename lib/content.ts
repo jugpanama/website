@@ -52,6 +52,9 @@ const noteSchema = z.object({
   figures: z.array(z.object({
     caption: z.string().min(1).optional(),
     attribution: z.string().min(1).optional(),
+    attributionUrl: z.string().url().optional(),
+    width: z.number().int().positive().optional(),
+    height: z.number().int().positive().optional(),
   })).optional().default([]),
   image: z.string().startsWith('/notas/').optional(),
   youtube: z.object({
