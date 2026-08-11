@@ -31,19 +31,37 @@ const eventSchema = z.object({
 })
 
 const noteSchema = z.object({
-  id: z.string(),
-  published: z.boolean().optional().default(true),
+  number: z.number().int().positive(),
+  published: z.boolean().optional().default(false),
   title: z.string(),
-  date: z.string().optional(),
-  displayDate: z.string().optional(),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Use an ISO date (YYYY-MM-DD)').optional(),
   summary: z.string(),
-  category: z.string(),
-  author: z.string(),
+  author: z.object({
+    name: z.string().min(1),
+    role: z.string().min(1).optional(),
+    bio: z.string().min(1).optional(),
+    avatar: z.string().url().optional(),
+    links: z.array(z.object({
+      label: z.string().min(1),
+      url: z.string().url(),
+    })).optional().default([]),
+  }),
+  readingTime: z.number().int().positive().optional(),
+  tags: z.array(z.string().min(1)).max(4).optional().default([]),
+  takeaways: z.array(z.string().min(1)).max(3).optional().default([]),
+  figures: z.array(z.object({
+    caption: z.string().min(1).optional(),
+    attribution: z.string().min(1).optional(),
+  })).optional().default([]),
+  image: z.string().startsWith('/notas/').optional(),
+  youtube: z.object({
+    id: z.string().regex(/^[A-Za-z0-9_-]{11}$/, 'Invalid YouTube video ID'),
+    title: z.string().min(1),
+  }).optional(),
   references: z.array(z.object({
     label: z.string(),
     url: z.string().url(),
   })).optional().default([]),
-  status: z.enum(['coming-soon', 'published']),
 })
 
 const sponsorSchema = z.object({
@@ -148,13 +166,27 @@ function parseNoteMarkdown(filePath: string): Note | null {
 
     return {
       ...result.data,
+      slug: path.basename(filePath, '.md'),
       content: parsed.content.trim(),
+      readingTime:
+        result.data.readingTime ?? estimateNoteReadingTime(parsed.content),
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown parsing error'
     console.warn(`[content] Failed to parse note ${path.basename(filePath)}: ${message}`)
     return null
   }
+}
+
+function estimateNoteReadingTime(content: string): number {
+  const readableText = content
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`[^`]+`/g, ' ')
+    .replace(/\[[^\]]+\]\([^\)]+\)/g, ' ')
+    .replace(/[#>*_~-]/g, ' ')
+  const words = readableText.trim().split(/\s+/).filter(Boolean).length
+
+  return Math.max(1, Math.ceil(words / 140))
 }
 
 export function getAllEventsFromMarkdown(): Event[] {
@@ -227,4 +259,11 @@ export function getNotesFromMarkdown(): Note[] {
       if (bTs === null) return -1
       return bTs - aTs
     })
+}
+
+export function getNoteBySlug(slug: string): Note | null {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return null
+
+  const note = parseNoteMarkdown(path.join(NOTES_DIR, `${slug}.md`))
+  return note?.published ? note : null
 }

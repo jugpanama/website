@@ -33,25 +33,61 @@ export interface Event {
   published?: boolean
 }
 
-export type NoteStatus = 'coming-soon' | 'published'
-
 export interface NoteReference {
   label: string
   url: string
 }
 
-export interface Note {
+export interface NoteYouTube {
   id: string
   title: string
+}
+
+export interface NoteAuthorLink {
+  label: string
+  url: string
+}
+
+export interface NoteAuthor {
+  name: string
+  role?: string
+  bio?: string
+  avatar?: string
+  links: NoteAuthorLink[]
+}
+
+export interface NoteFigure {
+  caption?: string
+  attribution?: string
+}
+
+export interface Note {
+  slug: string
+  number: number
+  title: string
   date?: string
-  displayDate?: string
   summary: string
-  category: string
-  author: string
+  author: NoteAuthor
   content: string
+  readingTime: number
+  tags: string[]
+  takeaways: string[]
+  figures: NoteFigure[]
   references: NoteReference[]
-  status: NoteStatus
-  published?: boolean
+  published: boolean
+  image?: string
+  youtube?: NoteYouTube
+}
+
+export function formatNoteDate(date?: string): string {
+  if (!date) return 'Fecha por confirmar'
+
+  return new Intl.DateTimeFormat('es-PA', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${date}T00:00:00Z`))
 }
 
 export interface Sponsor {
@@ -71,7 +107,7 @@ export const navLinks = [
   { href: '/#inicio', label: 'Inicio' },
   { href: '/#comunidad', label: 'Comunidad' },
   { href: '/#eventos', label: 'Eventos' },
-  { href: '/#notas', label: 'Notas' },
+  { href: '/notas', label: 'Notas' },
   { href: '/unete', label: 'Participa' },
 ]
 
@@ -80,7 +116,7 @@ export const footerLinks = {
     { href: '/#inicio', label: 'Inicio' },
     { href: '/#comunidad', label: 'Comunidad' },
     { href: '/#eventos', label: 'Eventos' },
-    { href: '/#notas', label: 'Panama JUG Notes' },
+    { href: '/notas', label: 'Panama JUG Notas' },
   ],
   community: [
     { href: '/sobre-jug-panama', label: 'Sobre Panama JUG' },

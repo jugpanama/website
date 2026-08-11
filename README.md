@@ -5,7 +5,7 @@ Sitio web oficial de Panama JUG para compartir informacion de la comunidad Java 
 ## Que incluye
 
 - Pagina principal con informacion del grupo.
-- Secciones de eventos proximos, eventos pasados y Panama JUG Notes.
+- Secciones de eventos proximos, eventos pasados y Panama JUG Notas.
 - Paginas informativas como contacto, sponsors, codigo de conducta y unete.
 - Contenido gestionado en archivos Markdown dentro de `content/`.
 
