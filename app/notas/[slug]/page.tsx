@@ -11,6 +11,7 @@ import { NoteThemeControls, NoteThemeProvider } from '@/components/NoteTheme'
 import YouTubeEmbed from '@/components/YouTubeEmbed'
 import { getNoteBySlug, getNotesFromMarkdown, getUpcomingEventsFromMarkdown } from '@/lib/content'
 import { formatNoteDate } from '@/lib/data'
+import { getNotePath } from '@/lib/note-route'
 
 type NotePageProps = { params: Promise<{ slug: string }> }
 
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: NotePageProps): Promise<Metad
   const note = getNoteBySlug(slug)
   if (!note) return {}
 
-  const url = `/notas/${note.slug}`
+  const url = getNotePath(note.slug)
   const image = note.image ?? '/og.png'
 
   return {
@@ -59,7 +60,7 @@ export default async function NotePage({ params }: NotePageProps) {
   if (!note) notFound()
 
   const nextEvent = getUpcomingEventsFromMarkdown()[0] ?? null
-  const url = `https://panamajug.org/notas/${note.slug}`
+  const url = `https://panamajug.org${getNotePath(note.slug)}`
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',

@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 import { NoteThemeControls, NoteThemeProvider } from '@/components/NoteTheme'
 import { getNotesFromMarkdown, getUpcomingEventsFromMarkdown } from '@/lib/content'
 import { formatNoteDate } from '@/lib/data'
+import { getNotePath } from '@/lib/note-route'
 
 export const metadata: Metadata = {
   title: 'Panama JUG Notas',
@@ -59,7 +60,7 @@ export default function NotesPage() {
                 {notes.map((note, index) => (
                   <article key={note.slug} className="note-index-card">
                     <Link
-                      href={`/notas/${note.slug}`}
+                      href={getNotePath(note.slug)}
                       className="note-index-card-surface focus-ring"
                       aria-label={`Leer ${note.title}`}
                     >

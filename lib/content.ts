@@ -3,6 +3,7 @@ import path from 'node:path'
 import matter from 'gray-matter'
 import { z } from 'zod'
 import type { Event, Note, Sponsor } from '@/lib/data'
+import { isValidNoteSlug } from '@/lib/note-route'
 
 const eventSchema = z.object({
   id: z.string(),
@@ -154,6 +155,14 @@ function listMarkdownFiles(folderPath: string): string[] {
 
 function parseNoteMarkdown(filePath: string): Note | null {
   try {
+    const slug = path.basename(filePath, '.md')
+    if (!isValidNoteSlug(slug)) {
+      console.warn(
+        `[content] Invalid note filename ${path.basename(filePath)}: use lowercase letters, numbers and single hyphens`
+      )
+      return null
+    }
+
     const source = fs.readFileSync(filePath, 'utf8')
     const parsed = matter(source)
     const result = noteSchema.safeParse(parsed.data)
@@ -169,7 +178,7 @@ function parseNoteMarkdown(filePath: string): Note | null {
 
     return {
       ...result.data,
-      slug: path.basename(filePath, '.md'),
+      slug,
       content: parsed.content.trim(),
       readingTime:
         result.data.readingTime ?? estimateNoteReadingTime(parsed.content),
@@ -265,7 +274,7 @@ export function getNotesFromMarkdown(): Note[] {
 }
 
 export function getNoteBySlug(slug: string): Note | null {
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return null
+  if (!isValidNoteSlug(slug)) return null
 
   const note = parseNoteMarkdown(path.join(NOTES_DIR, `${slug}.md`))
   return note?.published ? note : null

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, BookOpen, CalendarDays, UserRound } from 'lucide-react'
 import { formatNoteDate, type Note } from '@/lib/data'
 import { useInView } from '@/hooks/use-in-view'
+import { getNotePath } from '@/lib/note-route'
 
 export default function Notes({ notes }: { notes: Note[] }) {
   const [headerRef, headerInView] = useInView()
@@ -43,7 +44,7 @@ export default function Notes({ notes }: { notes: Note[] }) {
                 style={{ transitionDelay: cardsInView ? `${index * 100}ms` : '0ms' }}
               >
                 <Link
-                  href={`/notas/${note.slug}`}
+                  href={getNotePath(note.slug)}
                   aria-label={`Leer ${note.title}`}
                   className="focus-ring flex flex-1 flex-col rounded-2xl p-6"
                 >
