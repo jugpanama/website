@@ -1,6 +1,6 @@
 {
   "name": "jugpanama-website",
-  "version": "1.102.3",
+  "version": "1.102.4",
   "private": true,
   "scripts": {
     "dev": "next dev",
