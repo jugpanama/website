@@ -87,7 +87,7 @@ export default async function NotePage({ params }: NotePageProps) {
               <div className="mx-auto max-w-3xl">
                 <div className="note-header-actions">
                   <Link href="/notas" className="note-back-link focus-ring">
-                    <ArrowLeft aria-hidden="true" className="h-4 w-4" /> Todas las Notes
+                    <ArrowLeft aria-hidden="true" className="h-4 w-4" /> Todas las Notas
                   </Link>
                   <NoteThemeControls />
                 </div>
@@ -151,7 +151,7 @@ export default async function NotePage({ params }: NotePageProps) {
               <AboutNoteAuthor author={note.author} />
 
               <Link href="/notas" className="note-bottom-back-link focus-ring">
-                <ArrowLeft aria-hidden="true" className="h-4 w-4" /> Todas las Notes
+                <ArrowLeft aria-hidden="true" className="h-4 w-4" /> Todas las Notas
               </Link>
             </div>
           </article>
