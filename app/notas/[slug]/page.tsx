@@ -89,7 +89,7 @@ export default async function NotePage({ params }: NotePageProps) {
               <div className="mx-auto max-w-3xl">
                 <div className="note-header-actions">
                   <Link href="/notas" className="note-back-link focus-ring">
-                    <ArrowLeft aria-hidden="true" className="h-4 w-4" /> Todas las Notas
+                    <ArrowLeft aria-hidden="true" className="h-4 w-4" /> Volver a Notas
                   </Link>
                   <NoteThemeControls />
                 </div>
@@ -154,9 +154,19 @@ export default async function NotePage({ params }: NotePageProps) {
 
               <AboutNoteAuthor author={note.author} />
 
-              <Link href="/notas" className="note-bottom-back-link focus-ring">
-                <ArrowLeft aria-hidden="true" className="h-4 w-4" /> Todas las Notas
-              </Link>
+              <nav aria-label="Navegación de Notas" className="note-article-navigation">
+                <Link href="/notas" className="note-bottom-back-link focus-ring">
+                  <span className="note-bottom-back-icon" aria-hidden="true">
+                    <ArrowLeft className="h-5 w-5" />
+                  </span>
+                  <span className="note-bottom-back-copy">
+                    <span className="note-bottom-back-title">Volver a todas las Notas</span>
+                    <span className="note-bottom-back-description">
+                      Explorar la biblioteca técnica de Panama JUG
+                    </span>
+                  </span>
+                </Link>
+              </nav>
             </div>
           </article>
           <script type="application/ld+json">{JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>
