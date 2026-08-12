@@ -1,7 +1,7 @@
 ---
 number: 1
 title: "Java no sobrevivió por quedarse igual"
-date: "2026-08-07"
+date: "2026-08-11"
 summary: "La longevidad de Java no se explica por la inmovilidad, sino por su capacidad de evolucionar sin convertir cada cambio en un nuevo comienzo."
 author:
   name: "Jesús Aguirre"
