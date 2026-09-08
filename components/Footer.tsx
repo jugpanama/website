@@ -5,6 +5,8 @@ import { footerLinks } from '@/lib/data'
 import type { Event } from '@/lib/data'
 import { Github as GitHubIcon, Linkedin, Youtube, Twitter } from 'lucide-react'
 import packageJson from '@/package.json'
+import { trackEvent } from '@/lib/analytics'
+import { analyticsEvents } from '@/lib/analytics-events'
 
 const socialLinks = [
   { icon: GitHubIcon, href: 'https://github.com/jugpanama', label: 'GitHub', target: '_blank', rel: 'noopener noreferrer' },
@@ -45,6 +47,7 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
                   href={social.href}
                   target={social.target}
                   rel={social.rel}
+                  onClick={() => trackEvent(analyticsEvents.outboundClick, { destination_type: 'social', destination: social.label.toLowerCase() })}
                   className="focus-ring-inverse tap-target inline-flex items-center justify-center rounded-md text-white transition-colors hover:text-[#F89820]"
                   aria-label={social.label}
                 >
@@ -62,6 +65,7 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
                 <li key={link.href}>
                   <a
                     href={sectionHref(link.href)}
+                    onClick={() => trackEvent(analyticsEvents.navigationClick, { link_group: 'footer_navigation', link_name: link.label })}
                     className="focus-ring-inverse rounded-md text-sm text-[#CED4DA] transition-colors hover:text-white"
                   >
                     {link.label}
@@ -79,6 +83,7 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
                 <li key={link.label}>
                   <a
                     href={sectionHref(link.href)}
+                    onClick={() => trackEvent(analyticsEvents.navigationClick, { link_group: 'footer_community', link_name: link.label })}
                     className="focus-ring-inverse rounded-md text-sm text-[#CED4DA] transition-colors hover:text-white"
                   >
                     {link.label}

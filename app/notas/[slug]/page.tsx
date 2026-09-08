@@ -9,6 +9,7 @@ import NoteContent from '@/components/NoteContent'
 import ShareNote from '@/components/ShareNote'
 import { NoteThemeControls, NoteThemeProvider } from '@/components/NoteTheme'
 import YouTubeEmbed from '@/components/YouTubeEmbed'
+import NoteEngagementTracker from '@/components/NoteEngagementTracker'
 import { getNoteBySlug, getNotesFromMarkdown, getUpcomingEventsFromMarkdown } from '@/lib/content'
 import { formatNoteDate } from '@/lib/data'
 import { getNotePath } from '@/lib/note-route'
@@ -126,9 +127,10 @@ export default async function NotePage({ params }: NotePageProps) {
             </header>
 
             <div className="note-article-body mx-auto max-w-3xl px-4 py-10 md:py-14">
+              <NoteEngagementTracker noteId={note.slug} noteTags={note.tags} readingTime={note.readingTime} />
               <NoteContent content={note.content} figures={note.figures} />
 
-              <ShareNote title={note.title} url={url} />
+              <ShareNote noteId={note.slug} title={note.title} url={url} />
 
               {note.youtube && (
                 <section aria-labelledby="note-video-title" className="note-closing-section">
