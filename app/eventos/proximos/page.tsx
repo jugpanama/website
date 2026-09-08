@@ -3,6 +3,9 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { getUpcomingEventsFromMarkdown } from '@/lib/content'
 import { MapPin, Clock, Tag, ExternalLink, ArrowRight, Radio } from 'lucide-react'
+import TrackedLink from '@/components/TrackedLink'
+import EventViewTracker from '@/components/EventViewTracker'
+import { analyticsEvents } from '@/lib/analytics-events'
 
 const typeLabel: Record<string, string> = {
   virtual: 'Virtual',
@@ -100,6 +103,7 @@ export default function EventosProximosPage() {
                   id={event.id}
                   className="bg-white rounded-2xl border border-[#E9ECEF] shadow-sm overflow-hidden"
                 >
+                <EventViewTracker eventId={event.id} eventType={event.type} eventStatus={event.status} />
                 {/* Header */}
                 <div className="bg-[#2F4F7A] px-5 py-5 md:px-8 md:py-6">
                   <div className="flex flex-wrap gap-3 mb-3">
@@ -146,15 +150,17 @@ export default function EventosProximosPage() {
                         <p className="text-sm font-semibold text-[#212529]">Transmisión del evento</p>
                         <p className="text-xs text-[#6C757D]">La transmisión se abre en YouTube en una nueva pestaña.</p>
                       </div>
-                      <a
+                      <TrackedLink
                         href={livestreamUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        eventName={analyticsEvents.eventStreamClick}
+                        eventParams={{ event_id: event.id, provider: 'youtube' }}
                         className="inline-flex items-center justify-center gap-2 rounded bg-[#F89820] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
                       >
                         Ver transmisión
                         <Radio className="h-3.5 w-3.5" />
-                      </a>
+                      </TrackedLink>
                     </div>
                   ) : canRegister ? (
                     <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-xl border border-[#E9ECEF] bg-[#F8F9FA] px-4 py-4">
@@ -162,15 +168,17 @@ export default function EventosProximosPage() {
                         <p className="text-sm font-semibold text-[#212529]">Registro del evento</p>
                         <p className="text-xs text-[#6C757D]">El registro se abre en Luma en una nueva pestaña.</p>
                       </div>
-                      <a
+                      <TrackedLink
                         href={registrationUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        eventName={analyticsEvents.eventRegistrationClick}
+                        eventParams={{ event_id: event.id, provider: 'luma' }}
                         className="inline-flex items-center justify-center gap-2 rounded bg-[#F89820] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
                       >
                         Abrir registro
                         <ExternalLink className="h-3.5 w-3.5" />
-                      </a>
+                      </TrackedLink>
                     </div>
                   ) : (
                     <div className="mb-5 rounded-xl border border-dashed border-[#CED4DA] bg-[#F8F9FA] px-4 py-4">
@@ -219,15 +227,17 @@ export default function EventosProximosPage() {
 
                   {(canStream || canRegister) && (
                     <div className="flex justify-end">
-                      <a
+                      <TrackedLink
                         href={canStream ? livestreamUrl : registrationUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        eventName={canStream ? analyticsEvents.eventStreamClick : analyticsEvents.eventRegistrationClick}
+                        eventParams={{ event_id: event.id, provider: canStream ? 'youtube' : 'luma' }}
                         className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2F4F7A] hover:underline"
                       >
                         {canStream ? 'Abrir transmisión en YouTube' : 'Abrir registro en Luma'}
                         <ArrowRight className="h-3.5 w-3.5" />
-                      </a>
+                      </TrackedLink>
                     </div>
                   )}
 

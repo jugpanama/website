@@ -1,11 +1,14 @@
 import { Linkedin } from 'lucide-react'
+import TrackedLink from '@/components/TrackedLink'
+import { analyticsEvents } from '@/lib/analytics-events'
 
 interface ShareNoteProps {
+  noteId: string
   title: string
   url: string
 }
 
-export default function ShareNote({ title, url }: ShareNoteProps) {
+export default function ShareNote({ noteId, title, url }: ShareNoteProps) {
   const encodedUrl = encodeURIComponent(url)
   const encodedText = encodeURIComponent(`${title} — Panama JUG`)
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`
@@ -19,27 +22,31 @@ export default function ShareNote({ title, url }: ShareNoteProps) {
       </div>
       <ul className="note-share-actions" aria-label="Opciones para compartir">
         <li>
-          <a
+          <TrackedLink
             href={linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
+            eventName={analyticsEvents.noteShare}
+            eventParams={{ note_id: noteId, share_method: 'linkedin' }}
             className="note-share-button focus-ring"
             aria-label={`Compartir ${title} en LinkedIn`}
           >
             <Linkedin aria-hidden="true" className="h-4 w-4" />
             LinkedIn
-          </a>
+          </TrackedLink>
         </li>
         <li>
-          <a
+          <TrackedLink
             href={xUrl}
             target="_blank"
             rel="noopener noreferrer"
+            eventName={analyticsEvents.noteShare}
+            eventParams={{ note_id: noteId, share_method: 'x' }}
             className="note-share-button focus-ring"
             aria-label={`Compartir ${title} en X`}
           >
             X
-          </a>
+          </TrackedLink>
         </li>
       </ul>
     </section>

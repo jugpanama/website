@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import AnalyticsProvider from '@/components/AnalyticsProvider'
 import './globals.css'
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -76,9 +75,7 @@ export default function RootLayout({
         >
           Saltar al contenido principal
         </a>
-        {children}
-        <Analytics />
-        <SpeedInsights />
+        <AnalyticsProvider>{children}</AnalyticsProvider>
       </body>
     </html>
   )

@@ -1,17 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import Script from 'next/script'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { trackEvent } from '@/lib/analytics'
+import { analyticsEvents } from '@/lib/analytics-events'
 
 export default function ContactanosPage() {
   const [sent, setSent] = useState(false)
   const [isSending, setIsSending] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [turnstileSiteKey, setTurnstileSiteKey] = useState('')
+  const formStarted = useRef(false)
 
   useEffect(() => {
     let isMounted = true
@@ -74,6 +77,12 @@ export default function ContactanosPage() {
           ) : (
             <form
               className="grid gap-5 md:grid-cols-2"
+              onFocus={() => {
+                if (!formStarted.current) {
+                  formStarted.current = true
+                  trackEvent(analyticsEvents.formStart, { form_name: 'contact' })
+                }
+              }}
               onSubmit={async (e) => {
                 e.preventDefault()
                 setIsSending(true)
@@ -91,6 +100,7 @@ export default function ContactanosPage() {
                 }
 
                 if (!payload.captchaToken) {
+                  trackEvent(analyticsEvents.formError, { form_name: 'contact', error_code: 'captcha_required' })
                   setErrorMessage('Completa el captcha antes de enviar.')
                   setIsSending(false)
                   return
@@ -110,7 +120,10 @@ export default function ContactanosPage() {
 
                   form.reset()
                   setSent(true)
+                  trackEvent(analyticsEvents.formSubmit, { form_name: 'contact' })
+                  trackEvent(analyticsEvents.generateLead, { form_name: 'contact', lead_type: 'contact' })
                 } catch (error) {
+                  trackEvent(analyticsEvents.formError, { form_name: 'contact', error_code: 'request_failed' })
                   const message = error instanceof Error ? error.message : 'No se pudo enviar el mensaje.'
                   setErrorMessage(message)
                 } finally {

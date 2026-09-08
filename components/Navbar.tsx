@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { navLinks } from '@/lib/data'
 import { Menu, X } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics'
+import { analyticsEvents } from '@/lib/analytics-events'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -67,6 +69,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <a
                   href={sectionHref(link.href)}
+                  onClick={() => trackEvent(analyticsEvents.navigationClick, { link_group: 'navbar', link_name: link.label })}
                   className="focus-ring-inverse rounded-md px-1 py-1 text-sm font-semibold text-white/80 transition-colors hover:text-white"
                 >
                   {link.label}
@@ -107,8 +110,11 @@ export default function Navbar() {
                 <li key={link.href}>
                   <a
                     href={sectionHref(link.href)}
+                    onClick={() => {
+                      trackEvent(analyticsEvents.navigationClick, { link_group: 'navbar_mobile', link_name: link.label })
+                      setIsMobileMenuOpen(false)
+                    }}
                     className="focus-ring-inverse tap-target block rounded-lg px-3 py-2.5 text-base font-semibold text-white/85 transition-colors hover:bg-white/6 hover:text-white"
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.label}
                   </a>
