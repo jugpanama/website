@@ -3,6 +3,9 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { getPastEventsFromMarkdown, getUpcomingEventsFromMarkdown } from '@/lib/content'
 import { ArrowRight, Clock, MapPin, PlayCircle } from 'lucide-react'
+import TrackedLink from '@/components/TrackedLink'
+import EventViewTracker from '@/components/EventViewTracker'
+import { analyticsEvents } from '@/lib/analytics-events'
 
 const typeLabel: Record<string, string> = {
   virtual: 'Virtual',
@@ -64,6 +67,7 @@ export default function EventosPasadosPage() {
                 key={event.id}
                 className="card-hover overflow-hidden rounded-2xl border border-[#CED4DA] bg-white flex flex-col"
               >
+                <EventViewTracker eventId={event.id} eventType={event.type} eventStatus={event.status} />
                 <div className="relative flex aspect-video items-center justify-center bg-[linear-gradient(180deg,_#3A5F91_0%,_#2F4F7A_60%,_#22385A_100%)] px-5">
                   <div className="text-center">
                     <span className="text-xl font-bold tracking-tight">
@@ -106,15 +110,17 @@ export default function EventosPasadosPage() {
                   </div>
 
                   {event.youtubeUrl ? (
-                    <a
+                    <TrackedLink
                       href={event.youtubeUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      eventName={analyticsEvents.eventStreamClick}
+                      eventParams={{ event_id: event.id, provider: 'youtube' }}
                       className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-[#F89820] hover:underline"
                     >
                       <PlayCircle className="h-4 w-4" />
                       Ver grabación <ArrowRight className="h-3.5 w-3.5" />
-                    </a>
+                    </TrackedLink>
                   ) : (
                     <span className="mt-auto text-sm italic text-[#ADB5BD]">Grabación no disponible</span>
                   )}

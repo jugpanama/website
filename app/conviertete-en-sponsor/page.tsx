@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import Script from 'next/script'
@@ -8,6 +8,8 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Megaphone, Users, Sparkles } from 'lucide-react'
 import { useInView } from '@/hooks/use-in-view'
+import { trackEvent } from '@/lib/analytics'
+import { analyticsEvents } from '@/lib/analytics-events'
 
 const sponsorBenefits = [
   {
@@ -33,6 +35,7 @@ export default function ConvierteteEnSponsorPage() {
   const [errorMessage, setErrorMessage] = useState('')
   const [benefitsRef, benefitsInView] = useInView()
   const [turnstileSiteKey, setTurnstileSiteKey] = useState('')
+  const formStarted = useRef(false)
 
   useEffect(() => {
     let isMounted = true
@@ -114,6 +117,12 @@ export default function ConvierteteEnSponsorPage() {
 
               <form
                 className="grid gap-5 md:grid-cols-2"
+                onFocus={() => {
+                  if (!formStarted.current) {
+                    formStarted.current = true
+                    trackEvent(analyticsEvents.formStart, { form_name: 'sponsor' })
+                  }
+                }}
                 onSubmit={async (e) => {
                   e.preventDefault()
                   setIsSending(true)
@@ -133,6 +142,7 @@ export default function ConvierteteEnSponsorPage() {
                   }
 
                   if (!payload.captchaToken) {
+                    trackEvent(analyticsEvents.formError, { form_name: 'sponsor', error_code: 'captcha_required' })
                     setErrorMessage('Completa el captcha antes de enviar.')
                     setIsSending(false)
                     return
@@ -152,7 +162,10 @@ export default function ConvierteteEnSponsorPage() {
 
                     form.reset()
                     setSubmitted(true)
+                    trackEvent(analyticsEvents.formSubmit, { form_name: 'sponsor' })
+                    trackEvent(analyticsEvents.generateLead, { form_name: 'sponsor', lead_type: 'sponsor' })
                   } catch (error) {
+                    trackEvent(analyticsEvents.formError, { form_name: 'sponsor', error_code: 'request_failed' })
                     const message = error instanceof Error ? error.message : 'No se pudo enviar la solicitud.'
                     setErrorMessage(message)
                   } finally {

@@ -8,6 +8,8 @@ import { NoteThemeControls, NoteThemeProvider } from '@/components/NoteTheme'
 import { getNotesFromMarkdown, getUpcomingEventsFromMarkdown } from '@/lib/content'
 import { formatNoteDate } from '@/lib/data'
 import { getNotePath } from '@/lib/note-route'
+import TrackedLink from '@/components/TrackedLink'
+import { analyticsEvents } from '@/lib/analytics-events'
 
 export const metadata: Metadata = {
   title: 'Panama JUG Notas',
@@ -59,8 +61,10 @@ export default function NotesPage() {
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {notes.map((note, index) => (
                   <article key={note.slug} className="note-index-card">
-                    <Link
+                    <TrackedLink
                       href={getNotePath(note.slug)}
+                      eventName={analyticsEvents.noteOpen}
+                      eventParams={{ note_id: note.slug, note_tags: note.tags.join(',') }}
                       className="note-index-card-surface focus-ring"
                       aria-label={`Leer ${note.title}`}
                     >
@@ -94,7 +98,7 @@ export default function NotesPage() {
                           Leer Nota <ArrowRight className="h-4 w-4" />
                         </span>
                       </div>
-                    </Link>
+                    </TrackedLink>
                   </article>
                 ))}
               </div>

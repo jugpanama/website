@@ -14,6 +14,8 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import TrackedLink from '@/components/TrackedLink'
+import { analyticsEvents } from '@/lib/analytics-events'
 
 const participationPaths = [
   {
@@ -138,14 +140,16 @@ export default function UnetePage() {
               <p className="mt-2 text-sm leading-relaxed text-[#D7E1EE]">
                 Sessionize es el canal oficial para recibir y organizar las propuestas de charlas de Panama JUG.
               </p>
-              <a
+              <TrackedLink
                 href="https://sessionize.com/panama-jug-2026/"
                 target="_blank"
                 rel="noopener noreferrer"
+                eventName={analyticsEvents.speakerProposalClick}
+                eventParams={{ provider: 'sessionize' }}
                 className="focus-ring-inverse tap-target mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#F89820] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
               >
                 Proponer una charla <ExternalLink className="h-4 w-4" />
-              </a>
+              </TrackedLink>
             </div>
           </div>
         </section>
@@ -180,14 +184,16 @@ export default function UnetePage() {
               <p className="mt-2 text-sm leading-relaxed text-[#6C757D]">
                 Explora los repositorios existentes y comparte propuestas de mejora o documentación.
               </p>
-              <a
+              <TrackedLink
                 href="https://github.com/jugpanama"
                 target="_blank"
                 rel="noopener noreferrer"
+                eventName={analyticsEvents.communityContributionClick}
+                eventParams={{ destination_type: 'github', destination: 'jugpanama' }}
                 className="focus-ring mt-5 inline-flex items-center gap-2 self-start rounded-md text-sm font-semibold text-[#2F4F7A] hover:text-[#22385A]"
               >
                 Ver GitHub de Panama JUG <ExternalLink className="h-4 w-4" />
-              </a>
+              </TrackedLink>
             </div>
           </div>
         </section>
