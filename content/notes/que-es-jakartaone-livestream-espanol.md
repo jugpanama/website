@@ -45,7 +45,7 @@ El primer JakartaOne Livestream fue en 2019, exclusivamente en inglés. Desde 20
 | **Hora** | 10:00 AM AST (que es 9:00 AM hora de Panamá) |
 | **Modalidad** | 100% virtual / Online |
 | **Costo** | Completamente gratuito |
-| **Registro** | https://www.crowdcast.io/c/jakartaonelivestreamEspañol2026 |
+| **Registro** | https://www.crowdcast.io/c/jakartaonelivestreamspanish2026  |
 
 La transmisión será vía Crowdcast. El registro es simple: con tu email ya puedes ver todas las charlas en vivo, hacer preguntas en el chat y conectar con otros desarrolladores interesados en Jakarta EE.
 
