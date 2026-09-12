@@ -1,6 +1,6 @@
 ---
 number: 2
-title: "JakartaOne Livestream 2026 Spanish: qué es y cómo participar"
+title: "JakartaOne Livestream 2026 Español: qué es y cómo participar"
 date: "2026-09-12"
 summary: "Todo lo que necesitas saber sobre el evento virtual de Jakarta EE en español — para asistir o para postular una charla."
 author:
@@ -18,14 +18,14 @@ tags:
   - "Comunidad"
   - "Eventos"
 takeaways:
-  - "JakartaOne Livestream 2026 Spanish es un evento virtual y gratuito de Jakarta EE, completamente en español."
+  - "JakartaOne Livestream 2026 Español es un evento virtual y gratuito de Jakarta EE, completamente en español."
   - "Puedes asistir sin necesidad de ser experto, y también puedes postular una charla si tienes algo que aportar."
   - "Panama JUG apoya la difusión del evento; la organización y el CFP los gestiona Jakarta EE / Eclipse Foundation."
 published: true
 image: "/notas/que-es-jakartaone-livestream-espanol/social.png"
 ---
 
-Si trabajas con Java en Panamá o Latinoamérica, probablemente ya conozcas eventos técnicos que suceden sólo en inglés. Pero este 16 de octubre es diferente: **JakartaOne Livestream 2026 Spanish** es una conferencia virtual completamente en español, enfocada en Jakarta EE y las tecnologías que construyen la web moderna en Java.
+Si trabajas con Java en Panamá o Latinoamérica, probablemente ya conozcas eventos técnicos que suceden sólo en inglés. Pero este 16 de octubre es diferente: **JakartaOne Livestream 2026 Español** es una conferencia virtual completamente en español, enfocada en Jakarta EE y las tecnologías que construyen la web moderna en Java.
 
 No necesitas ser un experto para asistir, y si tienes algo que compartir, aún hay tiempo para postular una charla. Aquí te contamos qué es, cuándo sucede y cómo puedes participar.
 
@@ -45,7 +45,7 @@ El primer JakartaOne Livestream fue en 2019, exclusivamente en inglés. Desde 20
 | **Hora** | 10:00 AM AST (que es 9:00 AM hora de Panamá) |
 | **Modalidad** | 100% virtual / Online |
 | **Costo** | Completamente gratuito |
-| **Registro** | https://www.crowdcast.io/c/jakartaonelivestreamspanish2026 |
+| **Registro** | https://www.crowdcast.io/c/jakartaonelivestreamEspañol2026 |
 
 La transmisión será vía Crowdcast. El registro es simple: con tu email ya puedes ver todas las charlas en vivo, hacer preguntas en el chat y conectar con otros desarrolladores interesados en Jakarta EE.
 
@@ -94,7 +94,7 @@ El comité de programa revisará todas las propuestas y confirmará los seleccio
 
 ## ¡Está todo listo para participar!
 
-Si quieres **asistir**, regístrate aquí: https://www.crowdcast.io/c/jakartaonelivestreamspanish2026
+Si quieres **asistir**, regístrate aquí: https://www.crowdcast.io/c/jakartaonelivestreamEspañol2026
 
 Si tienes **una charla que compartir**, envía tu propuesta aquí: https://sessionize.com/jakartaone-livestream-en-espanol-2026/ (plazo: 20 de septiembre)
 
