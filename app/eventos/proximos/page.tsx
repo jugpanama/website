@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { getUpcomingEventsFromMarkdown } from '@/lib/content'
@@ -6,6 +6,7 @@ import { MapPin, Clock, Tag, ExternalLink, ArrowRight, Radio } from 'lucide-reac
 import TrackedLink from '@/components/TrackedLink'
 import EventViewTracker from '@/components/EventViewTracker'
 import { analyticsEvents } from '@/lib/analytics-events'
+import { useTranslations } from 'next-intl'
 
 const typeLabel: Record<string, string> = {
   virtual: 'Virtual',
@@ -14,6 +15,7 @@ const typeLabel: Record<string, string> = {
 }
 
 export default function EventosProximosPage() {
+  const t = useTranslations('eventsPage')
   const upcomingEvents = getUpcomingEventsFromMarkdown()
   const nextEvent = upcomingEvents[0] ?? null
 
@@ -24,11 +26,11 @@ export default function EventosProximosPage() {
         <div className="mx-auto max-w-5xl">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/25 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
-            Eventos abiertos
+            {t('eyebrow')}
           </p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#212529] mb-2">Próximos eventos</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#212529] mb-2">{t('title')}</h1>
           <p className="max-w-3xl text-[#6C757D] mb-8 md:mb-10">
-            Revisa la agenda activa, explora cada meetup y abre el registro cuando estés listo. Cuando un evento tenga formulario embebido, también podrás completar la inscripción desde esta misma página.
+            {t('intro')}
           </p>
 
           {nextEvent && (
@@ -37,7 +39,7 @@ export default function EventosProximosPage() {
                 <div className="min-w-0">
                   <p className="mb-2 inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/15 bg-[#2F4F7A]/6 px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#22385A]">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
-                    Próximo en agenda
+                    {t('next')}
                   </p>
                   <h2 className="mb-2 text-lg font-semibold leading-snug text-[#212529] sm:text-xl">
                     {nextEvent.title}
@@ -60,13 +62,13 @@ export default function EventosProximosPage() {
                     href={`#${nextEvent.id}`}
                     className="focus-ring tap-target inline-flex items-center justify-center rounded bg-[#F89820] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
                   >
-                    Ver detalles del meetup
+                    {t('details')}
                   </a>
                   <Link
                     href="/"
                     className="focus-ring inline-flex items-center justify-center rounded-md px-1 py-1 text-sm font-medium text-[#2F4F7A] transition-colors hover:text-[#22385A]"
                   >
-                    Volver al inicio
+                    {t('home')}
                   </Link>
                 </div>
               </div>
@@ -75,15 +77,15 @@ export default function EventosProximosPage() {
 
           {upcomingEvents.length === 0 && (
             <div className="rounded-2xl border border-dashed border-[#CED4DA] bg-white p-8 text-center">
-              <h2 className="text-xl font-bold text-[#212529] mb-2">Estamos preparando las próximas actividades</h2>
+              <h2 className="text-xl font-bold text-[#212529] mb-2">{t('preparingTitle')}</h2>
               <p className="mx-auto max-w-2xl text-sm text-[#6C757D] mb-6">
-                Próximamente compartiremos encuentros técnicos y contenido de la comunidad. Cada actividad aparecerá aquí cuando su fecha y detalles estén confirmados.
+                {t('preparingText')}
               </p>
               <Link
                 href="/"
                 className="inline-flex items-center justify-center rounded bg-[#F89820] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
               >
-                Volver al inicio
+                {t('home')}
               </Link>
             </div>
           )}
@@ -147,8 +149,8 @@ export default function EventosProximosPage() {
                   {canStream ? (
                     <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-xl border border-[#E9ECEF] bg-[#F8F9FA] px-4 py-4">
                       <div>
-                        <p className="text-sm font-semibold text-[#212529]">Transmisión del evento</p>
-                        <p className="text-xs text-[#6C757D]">La transmisión se abre en YouTube en una nueva pestaña.</p>
+                        <p className="text-sm font-semibold text-[#212529]">{t('streamTitle')}</p>
+                        <p className="text-xs text-[#6C757D]">{t('streamText')}</p>
                       </div>
                       <TrackedLink
                         href={livestreamUrl}
@@ -158,15 +160,15 @@ export default function EventosProximosPage() {
                         eventParams={{ event_id: event.id, provider: 'youtube' }}
                         className="inline-flex items-center justify-center gap-2 rounded bg-[#F89820] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
                       >
-                        Ver transmisión
+                        {t('watchStream')}
                         <Radio className="h-3.5 w-3.5" />
                       </TrackedLink>
                     </div>
                   ) : canRegister ? (
                     <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-xl border border-[#E9ECEF] bg-[#F8F9FA] px-4 py-4">
                       <div>
-                        <p className="text-sm font-semibold text-[#212529]">Registro del evento</p>
-                        <p className="text-xs text-[#6C757D]">El registro se abre en Luma en una nueva pestaña.</p>
+                        <p className="text-sm font-semibold text-[#212529]">{t('registrationTitle')}</p>
+                        <p className="text-xs text-[#6C757D]">{t('registrationText')}</p>
                       </div>
                       <TrackedLink
                         href={registrationUrl}
@@ -176,14 +178,14 @@ export default function EventosProximosPage() {
                         eventParams={{ event_id: event.id, provider: 'luma' }}
                         className="inline-flex items-center justify-center gap-2 rounded bg-[#F89820] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
                       >
-                        Abrir registro
+                        {t('openRegistration')}
                         <ExternalLink className="h-3.5 w-3.5" />
                       </TrackedLink>
                     </div>
                   ) : (
                     <div className="mb-5 rounded-xl border border-dashed border-[#CED4DA] bg-[#F8F9FA] px-4 py-4">
                       <p className="text-sm font-semibold text-[#212529]">
-                        {event.type === 'virtual' ? 'Transmisión no disponible por ahora' : 'Registro no disponible por ahora'}
+                        {event.type === 'virtual' ? t('streamUnavailable') : t('registrationUnavailable')}
                       </p>
                       <p className="mt-1 text-xs text-[#6C757D]">
                         {event.type === 'virtual'

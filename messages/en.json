@@ -211,6 +211,25 @@
     "contactText": "Use the form to say how you'd like to participate or connect with the community through its official channels.",
     "contactButton": "Contact us"
   },
+  "eventsPage": {
+    "eyebrow": "Open events",
+    "title": "Upcoming events",
+    "intro": "Review the active agenda, explore each meetup, and open registration when you are ready.",
+    "next": "Next on the agenda",
+    "details": "View meetup details",
+    "home": "Back to home",
+    "preparingTitle": "We are preparing the next activities",
+    "preparingText": "Technical meetups and community content are coming soon. Each activity will appear here once its date and details are confirmed.",
+    "agenda": "View current agenda",
+    "streamTitle": "Event stream",
+    "streamText": "The stream opens on YouTube in a new tab.",
+    "registrationTitle": "Event registration",
+    "registrationText": "Registration opens on Luma in a new tab.",
+    "watchStream": "Watch stream",
+    "openRegistration": "Open registration",
+    "streamUnavailable": "Stream unavailable for now",
+    "registrationUnavailable": "Registration unavailable for now"
+  },
   "notesPage": {
     "eyebrow": "Technical library",
     "title": "Panama JUG Notes",
