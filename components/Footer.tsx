@@ -1,7 +1,8 @@
 "use client"
 
+import { Link } from '@/i18n/navigation'
 import { usePathname } from 'next/navigation'
-import { footerLinks } from '@/lib/data'
+import { useTranslations } from 'next-intl'
 import type { Event } from '@/lib/data'
 import { Github as GitHubIcon, Linkedin, Youtube, Twitter } from 'lucide-react'
 import packageJson from '@/package.json'
@@ -17,7 +18,24 @@ const socialLinks = [
 
 export default function Footer({ nextEvent = null }: { nextEvent?: Event | null }) {
   const pathname = usePathname()
+  const t = useTranslations('footer')
   const siteVersion = packageJson.version
+
+  const footerLinks = {
+    navigation: [
+      { href: '/#inicio', label: t('navigation') },
+      { href: '/#comunidad', label: t('community') },
+      { href: '/#eventos', label: t('events', { defaultValue: 'Events' }) },
+      { href: '/notas', label: 'Panama JUG Notes' },
+    ],
+    community: [
+      { href: '/sobre-jug-panama', label: t('about') },
+      { href: '/unete', label: t('participate') },
+      { href: '/conviertete-en-sponsor', label: t('sponsor') },
+      { href: '/codigo-de-conducta', label: t('conduct') },
+      { href: '/contactanos', label: t('contact') },
+    ],
+  }
 
   function sectionHref(href: string) {
     if (pathname !== '/') return href
@@ -32,13 +50,13 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
         <div className={`grid grid-cols-1 gap-12 mb-12 sm:grid-cols-2 ${nextEvent ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
           {/* Brand Column */}
           <div>
-            <a href={sectionHref('/#inicio')} className="focus-ring-inverse mb-4 flex items-center rounded-md">
+            <Link href={sectionHref('/#inicio')} className="focus-ring-inverse mb-4 flex items-center rounded-md">
               <span className="text-xl font-bold tracking-tight text-white">
                 Panama<span className="text-[#F89820]">JUG</span>
               </span>
-            </a>
+            </Link>
             <p className="text-[#CED4DA] text-sm mb-6">
-              La comunidad Java de Panamá
+              {t('community')}
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
@@ -59,17 +77,17 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
 
           {/* Navigation Column */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Navegación</h4>
+            <h4 className="font-semibold text-white mb-4">{t('navigation')}</h4>
             <ul className="space-y-3">
               {footerLinks.navigation.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={sectionHref(link.href)}
                     onClick={() => trackEvent(analyticsEvents.navigationClick, { link_group: 'footer_navigation', link_name: link.label })}
                     className="focus-ring-inverse rounded-md text-sm text-[#CED4DA] transition-colors hover:text-white"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -77,17 +95,17 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
 
           {/* Community Column */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Comunidad</h4>
+            <h4 className="font-semibold text-white mb-4">{t('community')}</h4>
             <ul className="space-y-3">
               {footerLinks.community.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={sectionHref(link.href)}
                     onClick={() => trackEvent(analyticsEvents.navigationClick, { link_group: 'footer_community', link_name: link.label })}
                     className="focus-ring-inverse rounded-md text-sm text-[#CED4DA] transition-colors hover:text-white"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -96,7 +114,7 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
           {/* Next Event Column */}
           {nextEvent && (
             <div>
-              <h4 className="font-semibold text-white mb-4">Próximo evento</h4>
+              <h4 className="font-semibold text-white mb-4">{t('nextEvent')}</h4>
               <div className="bg-[#2F4F7A] rounded-lg p-4 border border-white/10">
                 <p className="font-mono text-xs text-[#F89820] mb-2">
                   {nextEvent.displayDate ?? 'Fecha por confirmar'}
@@ -104,13 +122,13 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
                 <p className="text-white text-sm font-medium mb-3 line-clamp-2">
                   {nextEvent.title}
                 </p>
-                <a
+                <Link
                   href="/eventos/proximos"
                   aria-label={`Ver agenda del próximo evento: ${nextEvent.title}`}
                   className="focus-ring-inverse tap-target inline-flex items-center justify-center rounded bg-[#F89820] px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
                 >
-                  Ver agenda
-                </a>
+                  {t('viewAgenda')}
+                </Link>
               </div>
             </div>
           )}
@@ -119,13 +137,13 @@ export default function Footer({ nextEvent = null }: { nextEvent?: Event | null 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-[#CED4DA]">
-            © 2026 Panama JUG.
+            {t('copyright')}
           </p>
           <div className="flex flex-col items-center gap-1 sm:items-end">
             <p className="text-sm text-[#CED4DA]">
-              Hecho con ☕ en Panamá
+              {t('madeIn')}
             </p>
-            <p className="text-xs text-[#ADB5BD]">Version v{siteVersion}</p>
+            <p className="text-xs text-[#ADB5BD]">{t('version')} v{siteVersion}</p>
           </div>
         </div>
       </div>

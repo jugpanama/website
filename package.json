@@ -1,6 +1,6 @@
 {
   "name": "jugpanama-website",
-  "version": "1.109.7",
+  "version": "1.109.8",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -16,6 +16,7 @@
     "lucide-react": "^0.577.0",
     "mermaid": "^11.16.1",
     "next": "16.3.4",
+    "next-intl": "^4.14.8",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-markdown": "^10.1.0",

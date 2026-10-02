@@ -1,9 +1,10 @@
 'use client'
 
 import type { Event } from '@/lib/data'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { ArrowRight } from 'lucide-react'
 import { useInView } from '@/hooks/use-in-view'
+import { useTranslations } from 'next-intl'
 
 export default function PastEvents({
   pastEvents,
@@ -14,6 +15,7 @@ export default function PastEvents({
 }) {
   const [headerRef, headerInView] = useInView()
   const [cardsRef, cardsInView] = useInView()
+  const t = useTranslations('home.past')
   const resolvedTotal = totalCount ?? pastEvents.length
   const shouldShowAllLink = resolvedTotal > 0
 
@@ -28,10 +30,10 @@ export default function PastEvents({
           <div>
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/20 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
-              Eventos pasados
+              {t('eyebrow')}
             </p>
             <h2 id="past-events-title" className="text-3xl md:text-4xl font-bold text-[#212529]">
-              Lo que hemos construido juntos
+              {t('title')}
             </h2>
           </div>
 
@@ -40,22 +42,22 @@ export default function PastEvents({
               href="/eventos/pasados"
               className="focus-ring inline-flex items-center rounded-md font-medium text-[#2F4F7A] hover:text-[#22385A]"
             >
-              Ver todos <ArrowRight className="ml-1 h-4 w-4" />
+              {t('all')} <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           )}
         </div>
 
         {pastEvents.length === 0 && (
           <div className="rounded-2xl border border-dashed border-[#CED4DA] bg-white p-8 text-center">
-            <h3 className="text-xl font-bold text-[#212529] mb-2">Estamos preparando nuestras primeras actividades comunitarias</h3>
+            <h3 className="text-xl font-bold text-[#212529] mb-2">{t('emptyTitle')}</h3>
             <p className="mx-auto max-w-2xl text-sm text-[#6C757D] mb-6">
-              Próximamente compartiremos encuentros técnicos y contenido de la comunidad. Después de cada actividad publicaremos aquí su resumen y grabación, cuando estén disponibles.
+              {t('emptyText')}
             </p>
             <Link
               href="/eventos/proximos"
               className="focus-ring inline-flex items-center rounded-md bg-[#F89820] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
             >
-              Ver agenda actual
+              {t('agenda')}
             </Link>
           </div>
         )}
@@ -82,7 +84,7 @@ export default function PastEvents({
               <div className="p-5 flex flex-col flex-grow">
                 {/* Date */}
                 <p className="font-mono text-xs text-[#6C757D] mb-2">
-                  {event.displayDate ?? 'Fecha por confirmar'}
+                  {event.displayDate ?? t('dateUnknown')}
                 </p>
 
                 {/* Title */}
@@ -113,13 +115,13 @@ export default function PastEvents({
                     href={event.youtubeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Ver grabación del evento ${event.title}`}
+                    aria-label={t('recordingLabel', { title: event.title })}
                     className="focus-ring mt-auto inline-flex items-center rounded-md text-sm font-medium text-[#F89820] hover:text-[#DD7A0A]"
                   >
-                    Ver grabación <ArrowRight className="ml-1 h-3 w-3" />
+                    {t('recording')} <ArrowRight className="ml-1 h-3 w-3" />
                   </a>
                 ) : (
-                  <span className="mt-auto text-sm text-[#ADB5BD] italic">Grabación no disponible</span>
+                  <span className="mt-auto text-sm text-[#ADB5BD] italic">{t('noRecording')}</span>
                 )}
               </div>
             </article>

@@ -1,17 +1,18 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import type { Event } from '@/lib/data'
 import { MapPin, Clock, ArrowRight, ExternalLink, Radio } from 'lucide-react'
 import { useInView } from '@/hooks/use-in-view'
-
-const typeLabel: Record<Event['type'], string> = {
-  virtual: 'Virtual',
-  presencial: 'Presencial',
-  hibrido: 'Híbrido',
-}
+import { useTranslations } from 'next-intl'
 
 export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Event[] }) {
+  const t = useTranslations('home.upcoming')
+  const typeLabel: Record<Event['type'], string> = {
+    virtual: t('virtual'),
+    presencial: t('inPerson'),
+    hibrido: t('hybrid'),
+  }
   const [headerRef, headerInView] = useInView()
   const [cardsRef, cardsInView] = useInView()
   const cardsLayoutClass =
@@ -37,34 +38,34 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
           <div className="max-w-2xl">
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#F89820]/35 bg-[#F89820]/10 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#FFD8A6]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#F89820]" />
-              Próximos eventos
+              {t('eyebrow')}
             </p>
             <h2 id="upcoming-events-title" className="text-3xl md:text-4xl font-bold text-white">
-              No te pierdas lo que viene
+              {t('title')}
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#D7E1EE] md:text-base">
-              Revisa la próxima agenda de la comunidad, con detalles de speaker, modalidad y acciones disponibles para registro o transmisión.
+              {t('intro')}
             </p>
             <Link
               href="/eventos/proximos"
               className="focus-ring-inverse mt-5 inline-flex w-full items-center justify-center rounded-full border border-[#F8B04A]/45 bg-[#22385A]/30 px-5 py-2.5 text-[#FFD08A] font-semibold transition-colors hover:border-[#F8B04A] hover:text-white sm:w-auto"
             >
-              Ver agenda completa <ArrowRight className="ml-1 h-4 w-4" />
+              {t('agenda')} <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
         </div>
 
         {upcomingEvents.length === 0 && (
           <div className="rounded-2xl border border-dashed border-white/25 bg-[#22385A]/45 p-8 text-center">
-            <h3 className="text-xl font-bold text-white mb-2">Estamos preparando las próximas actividades</h3>
+            <h3 className="text-xl font-bold text-white mb-2">{t('emptyTitle')}</h3>
             <p className="mx-auto max-w-2xl text-sm text-[#D7E1EE] mb-6">
-              Próximamente compartiremos encuentros técnicos y contenido de la comunidad. Publicaremos cada actividad cuando sus detalles estén confirmados.
+              {t('emptyText')}
             </p>
             <Link
               href="/unete"
               className="focus-ring-inverse inline-flex items-center justify-center rounded bg-[#F89820] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
             >
-              Proponer un tema o participar
+              {t('join')}
             </Link>
           </div>
         )}
@@ -82,8 +83,8 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
               : canRegister
                 ? 'Abrir registro'
                 : event.type === 'virtual'
-                  ? 'Transmisión próximamente'
-                  : 'Registro próximamente'
+                  ? t('streamSoon')
+                  : t('registerSoon')
 
             return (
               <article
@@ -94,7 +95,7 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
                 {/* Date and type */}
                 <div className="mb-4 flex flex-wrap items-center gap-2.5">
                   <span className="rounded-md bg-[#1A2E4A] px-3 py-1.5 font-mono text-sm tracking-[0.04em] text-[#F8B04A]">
-                    {event.displayDate ?? 'Fecha por confirmar'}
+                    {event.displayDate ?? t('dateUnknown')}
                   </span>
                   <span className="rounded-md border border-[#F8B04A]/55 bg-[#F8B04A]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-[#FFD08A]">
                     {typeLabel[event.type]}
@@ -111,7 +112,7 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
 
                 {/* Speaker block */}
                 <div className="mb-4 rounded-lg border border-white/12 bg-[#22385A]/48 p-3.5">
-                  <p className="text-[11px] font-mono uppercase tracking-[0.12em] text-[#AFC4DD]">Speaker</p>
+                  <p className="text-[11px] font-mono uppercase tracking-[0.12em] text-[#AFC4DD]">{t('speaker')}</p>
                   <p className="mt-1 text-sm font-semibold text-white">{event.speakerName}</p>
                   <p className="text-sm text-[#D7E1EE]">{event.speakerCompany}</p>
                 </div>
@@ -120,7 +121,7 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
                 <div className="mb-5 grid grid-cols-1 gap-2.5 text-sm text-[#E6EDF7] sm:grid-cols-2">
                   <span className="inline-flex items-center gap-2 rounded-md border border-white/12 bg-[#1F3552]/55 px-3 py-2">
                     <Clock className="h-4 w-4 text-[#F8B04A]" />
-                    {event.time ?? 'Hora por confirmar'}
+                    {event.time ?? t('timeUnknown')}
                   </span>
                   <span className="inline-flex items-center gap-2 rounded-md border border-white/12 bg-[#1F3552]/55 px-3 py-2">
                     <MapPin className="h-4 w-4 text-[#F8B04A]" />
@@ -147,10 +148,10 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
                       href={livestreamUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Abrir transmisión del evento ${event.title} en YouTube`}
+                      aria-label={t('openStreamLabel', { title: event.title })}
                       className="focus-ring-inverse tap-target inline-flex w-full items-center justify-center gap-2 rounded bg-[#F89820] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
                     >
-                      {actionLabel}
+                      {canStream ? t('stream') : actionLabel}
                       <Radio className="h-3.5 w-3.5" />
                     </a>
                   ) : canRegister ? (
@@ -158,10 +159,10 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
                       href={registrationUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Abrir registro del evento ${event.title} en Luma`}
+                      aria-label={t('openRegisterLabel', { title: event.title })}
                       className="focus-ring-inverse tap-target inline-flex w-full items-center justify-center gap-2 rounded bg-[#F89820] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
                     >
-                      Abrir registro
+                      {t('register')}
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   ) : (
