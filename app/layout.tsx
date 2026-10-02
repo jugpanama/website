@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
+import { NextIntlClientProvider } from 'next-intl'
 import AnalyticsProvider from '@/components/AnalyticsProvider'
+import messages from '@/messages/es.json'
 import './globals.css'
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -75,7 +77,9 @@ export default function RootLayout({
         >
           Saltar al contenido principal
         </a>
-        <AnalyticsProvider>{children}</AnalyticsProvider>
+        <NextIntlClientProvider locale="es" messages={messages}>
+          <AnalyticsProvider>{children}</AnalyticsProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

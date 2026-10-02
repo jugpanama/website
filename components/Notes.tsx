@@ -1,14 +1,16 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { ArrowRight, BookOpen, CalendarDays, UserRound } from 'lucide-react'
 import { formatNoteDate, type Note } from '@/lib/data'
 import { useInView } from '@/hooks/use-in-view'
 import { getNotePath } from '@/lib/note-route'
+import { useTranslations } from 'next-intl'
 
 export default function Notes({ notes }: { notes: Note[] }) {
   const [headerRef, headerInView] = useInView()
   const [cardsRef, cardsInView] = useInView()
+  const t = useTranslations('home.notesSection')
 
   return (
     <section id="notas" aria-labelledby="notes-title" className="bg-white py-16 md:py-24">
@@ -19,19 +21,19 @@ export default function Notes({ notes }: { notes: Note[] }) {
         >
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/20 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
             <BookOpen className="h-3.5 w-3.5 text-[#F89820]" />
-            Panama JUG Notas
+            {t('eyebrow')}
           </p>
           <h2 id="notes-title" className="text-3xl font-bold text-[#212529] md:text-4xl">
-            Ideas técnicas desde la comunidad
+            {t('title')}
           </h2>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#495057]">
-            Notas breves sobre Java, la JVM, Jakarta EE, Cloud Native y las tecnologías que usamos para construir software.
+            {t('intro')}
           </p>
           <Link
             href="/notas"
             className="focus-ring mt-5 inline-flex items-center gap-2 rounded-md text-sm font-semibold text-[#2F4F7A] hover:text-[#22385A]"
           >
-            Explorar todas las Notes <ArrowRight className="h-4 w-4" />
+            {t('all')} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
@@ -45,12 +47,12 @@ export default function Notes({ notes }: { notes: Note[] }) {
               >
                 <Link
                   href={getNotePath(note.slug)}
-                  aria-label={`Leer ${note.title}`}
+                  aria-label={t('readLabel', { title: note.title })}
                   className="focus-ring flex flex-1 flex-col rounded-2xl p-6"
                 >
                   <div className="mb-6 flex items-start justify-between gap-4">
                     <span className="inline-flex rounded-md bg-[#22385A] px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-white">
-                      Panama JUG Notas
+                      {t('cardLabel')}
                     </span>
                     <span className="rounded-full border border-[#F89820]/35 bg-[#F89820]/10 px-2.5 py-1 text-xs font-semibold text-[#9A4F00]">
                       #{String(note.number).padStart(3, '0')}
@@ -70,7 +72,7 @@ export default function Notes({ notes }: { notes: Note[] }) {
                       {formatNoteDate(note.date)}
                     </p>
                     <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[#2F4F7A]">
-                    Leer Nota <ArrowRight className="h-4 w-4" />
+                    {t('read')} <ArrowRight className="h-4 w-4" />
                     </span>
                   </div>
                 </Link>

@@ -95,7 +95,10 @@ const sponsorSchema = z.object({
 const EVENTS_UPCOMING_DIR = path.join(process.cwd(), 'content/events/actuales')
 const EVENTS_PAST_DIR = path.join(process.cwd(), 'content/events/pasados')
 const SPONSORS_DIR = path.join(process.cwd(), 'content/sponsors')
-const NOTES_DIR = path.join(process.cwd(), 'content/notes')
+const NOTES_DIRS = {
+  es: path.join(process.cwd(), 'content/notes'),
+  en: path.join(process.cwd(), 'content/notes/en'),
+} as const
 
 function getEventTimestamp(dateValue?: string): number | null {
   if (!dateValue) return null
@@ -258,8 +261,8 @@ export function getSponsorsFromMarkdown(): Sponsor[] {
     .sort((a, b) => a.sortOrder - b.sortOrder)
 }
 
-export function getNotesFromMarkdown(): Note[] {
-  return listMarkdownFiles(NOTES_DIR)
+export function getNotesFromMarkdown(locale: 'es' | 'en' = 'es'): Note[] {
+  return listMarkdownFiles(NOTES_DIRS[locale])
     .map((filePath) => parseNoteMarkdown(filePath))
     .filter((note): note is Note => note !== null)
     .filter((note) => note.published !== false)
@@ -273,9 +276,9 @@ export function getNotesFromMarkdown(): Note[] {
     })
 }
 
-export function getNoteBySlug(slug: string): Note | null {
+export function getNoteBySlug(slug: string, locale: 'es' | 'en' = 'es'): Note | null {
   if (!isValidNoteSlug(slug)) return null
 
-  const note = parseNoteMarkdown(path.join(NOTES_DIR, `${slug}.md`))
+  const note = parseNoteMarkdown(path.join(NOTES_DIRS[locale], `${slug}.md`))
   return note?.published ? note : null
 }

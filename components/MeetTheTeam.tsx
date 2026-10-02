@@ -2,9 +2,11 @@
 
 import Link from 'next/link'
 import { Github, Linkedin, Users } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useInView } from '@/hooks/use-in-view'
 
 export default function MeetTheTeam() {
+  const t = useTranslations('home.leadership')
   const [headerRef, headerInView] = useInView()
   const [cardRef, cardInView] = useInView()
   return (
@@ -20,10 +22,10 @@ export default function MeetTheTeam() {
         >
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2F4F7A]/20 bg-[#2F4F7A]/8 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#22385A]">
             <Users className="h-4 w-4 text-[#F89820]" />
-            Liderazgo
+            {t('eyebrow')}
           </p>
           <h2 id="leadership-title" className="text-3xl font-bold text-[#212529] md:text-4xl">
-            Construyendo la comunidad paso a paso
+            {t('title')}
           </h2>
         </div>
 
@@ -36,7 +38,7 @@ export default function MeetTheTeam() {
               href="https://github.com/aguirre-jes"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Ver el perfil de GitHub de Jesús Aguirre"
+              aria-label={t('profileLabel')}
               className="focus-ring mb-4 rounded-full"
             >
               <img
@@ -49,14 +51,14 @@ export default function MeetTheTeam() {
             </Link>
 
             <h3 className="text-xl font-bold text-[#22385A]">Jesús Aguirre</h3>
-            <p className="mt-1 text-sm font-semibold text-[#495057]">JUG Leader</p>
+            <p className="mt-1 text-sm font-semibold text-[#495057]">{t('role')}</p>
 
             <div className="mt-5 flex items-center gap-3">
               <Link
                 href="https://github.com/aguirre-jes"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub de Jesús Aguirre"
+                aria-label={t('githubLabel')}
                 className="focus-ring tap-target inline-flex items-center justify-center rounded-md text-[#212529] transition-colors hover:text-[#F89820]"
               >
                 <Github className="h-6 w-6" />
@@ -65,7 +67,7 @@ export default function MeetTheTeam() {
                 href="https://www.linkedin.com/in/jesusaguirre-sa/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn de Jesús Aguirre"
+                aria-label={t('linkedinLabel')}
                 className="focus-ring tap-target inline-flex items-center justify-center rounded-md text-[#0A66C2] transition-colors hover:text-[#F89820]"
               >
                 <Linkedin className="h-6 w-6" />

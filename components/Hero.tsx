@@ -1,5 +1,8 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
+
 function FocusCard({ label }: { label: string }) {
   return (
     <div className="flex min-w-0 flex-1 items-center justify-center px-3 py-5 sm:px-6">
@@ -9,6 +12,8 @@ function FocusCard({ label }: { label: string }) {
 }
 
 export default function Hero() {
+  const t = useTranslations('home')
+
   return (
     <section
       id="inicio"
@@ -80,17 +85,17 @@ export default function Hero() {
         {/* Eyebrow */}
         <p className="animate-fade-in-up mb-5 inline-flex items-center gap-2 rounded-full border border-[#F89820]/35 bg-[#F89820]/10 px-3.5 py-1.5 font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFD8A6]">
           <span className="h-1.5 w-1.5 rounded-full bg-[#F89820] pulse-dot" />
-          Comunidad Java en Panamá
+          {t('eyebrow')}
         </p>
 
         {/* Main Headline */}
         <h1 id="hero-title" className="animate-fade-in-up-delay-1 mx-auto max-w-[12.5ch] text-[2.45rem] sm:max-w-none sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] sm:leading-tight mb-5 sm:mb-6 text-balance">
-          El punto de encuentro para la comunidad <span className="text-[#F89820]">Java</span> en Panamá
+          {t('headline')}
         </h1>
 
         {/* Subheadline */}
         <p className="animate-fade-in-up-delay-2 text-[16px] sm:text-lg md:text-xl text-[#D6DCE3] max-w-[22rem] sm:max-w-[34rem] mx-auto mb-8 sm:mb-10 leading-relaxed">
-          Una comunidad técnica abierta para aprender, compartir experiencias y fortalecer el ecosistema Java local de forma sostenible.
+          {t('subheadline')}
         </p>
 
         {/* CTA */}
@@ -99,24 +104,24 @@ export default function Hero() {
             href="#comunidad"
             className="focus-ring-inverse tap-target inline-flex items-center justify-center gap-1.5 rounded-full bg-[#F89820] px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white transition-colors hover:bg-[#DD7A0A]"
           >
-            Conoce la comunidad
+            {t('ctaPrimary')}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
           </a>
-          <a
+          <Link
             href="/unete"
             className="focus-ring-inverse tap-target inline-flex items-center justify-center rounded-full border border-white/30 bg-white/8 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/14 sm:px-8 sm:text-base"
           >
-            Cómo participar
-          </a>
+            {t('ctaSecondary')}
+          </Link>
         </div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 z-20 flex translate-y-1/2 justify-center px-4 sm:px-6 lg:px-8" aria-label="Áreas técnicas de la comunidad">
         <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden">
           <div className="flex divide-x divide-gray-100">
-            <FocusCard label="Java & JVM" />
-            <FocusCard label="Jakarta EE" />
-            <FocusCard label="Cloud Native" />
+            {t.raw('focusLabels').map((label: string) => (
+              <FocusCard key={label} label={label} />
+            ))}
           </div>
         </div>
       </div>

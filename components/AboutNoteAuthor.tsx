@@ -1,10 +1,12 @@
 import { ExternalLink } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import type { NoteAuthor } from '@/lib/data'
 
 export default function AboutNoteAuthor({ author }: { author: NoteAuthor }) {
+  const t = useTranslations('notesPage')
   return (
     <section aria-labelledby="note-author-title" className="note-closing-section note-author-card">
-      <h2 id="note-author-title" className="note-section-title">Sobre el autor</h2>
+      <h2 id="note-author-title" className="note-section-title">{t('author')}</h2>
       <div className="note-author-profile">
         {author.avatar && (
           <img
@@ -22,7 +24,7 @@ export default function AboutNoteAuthor({ author }: { author: NoteAuthor }) {
           {author.role && <p className="note-author-role">{author.role}</p>}
           {author.bio && <p className="note-author-bio">{author.bio}</p>}
           {author.links.length > 0 && (
-            <ul className="note-author-links" aria-label={`Enlaces de ${author.name}`}>
+            <ul className="note-author-links" aria-label={t('authorLinks', { name: author.name })}>
               {author.links.map((link) => (
                 <li key={link.url}>
                   <a href={link.url} target="_blank" rel="noopener noreferrer" className="note-inline-link">

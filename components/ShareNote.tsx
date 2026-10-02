@@ -1,6 +1,7 @@
 import { Linkedin } from 'lucide-react'
 import TrackedLink from '@/components/TrackedLink'
 import { analyticsEvents } from '@/lib/analytics-events'
+import { useTranslations } from 'next-intl'
 
 interface ShareNoteProps {
   noteId: string
@@ -9,6 +10,7 @@ interface ShareNoteProps {
 }
 
 export default function ShareNote({ noteId, title, url }: ShareNoteProps) {
+  const t = useTranslations('notesPage')
   const encodedUrl = encodeURIComponent(url)
   const encodedText = encodeURIComponent(`${title} — Panama JUG`)
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`
@@ -17,10 +19,10 @@ export default function ShareNote({ noteId, title, url }: ShareNoteProps) {
   return (
     <section className="note-share" aria-labelledby="note-share-title">
       <div className="note-share-copy">
-        <h2 id="note-share-title">Compartir esta Note</h2>
-        <p>Ayuda a que esta conversación llegue a más profesionales de tecnología.</p>
+        <h2 id="note-share-title">{t('shareTitle')}</h2>
+        <p>{t('shareText')}</p>
       </div>
-      <ul className="note-share-actions" aria-label="Opciones para compartir">
+      <ul className="note-share-actions" aria-label={t('shareOptions')}>
         <li>
           <TrackedLink
             href={linkedinUrl}
@@ -29,7 +31,7 @@ export default function ShareNote({ noteId, title, url }: ShareNoteProps) {
             eventName={analyticsEvents.noteShare}
             eventParams={{ note_id: noteId, share_method: 'linkedin' }}
             className="note-share-button focus-ring"
-            aria-label={`Compartir ${title} en LinkedIn`}
+            aria-label={t('shareLinkedIn', { title })}
           >
             <Linkedin aria-hidden="true" className="h-4 w-4" />
             LinkedIn
@@ -43,7 +45,7 @@ export default function ShareNote({ noteId, title, url }: ShareNoteProps) {
             eventName={analyticsEvents.noteShare}
             eventParams={{ note_id: noteId, share_method: 'x' }}
             className="note-share-button focus-ring"
-            aria-label={`Compartir ${title} en X`}
+            aria-label={t('shareX', { title })}
           >
             X
           </TrackedLink>
