@@ -10,7 +10,9 @@ const eventSchema = z.object({
   slug: z.string().optional(),
   published: z.boolean().optional().default(true),
   title: z.string(),
+  titleEn: z.string().optional(),
   description: z.string(),
+  descriptionEn: z.string().optional(),
   summary: z.string().optional(),
   date: z.string().optional(),
   displayDate: z.string().optional(),
@@ -18,6 +20,7 @@ const eventSchema = z.object({
   status: z.enum(['upcoming', 'past', 'cancelled']),
   speakerName: z.string(),
   speakerCompany: z.string(),
+  speakerCompanyEn: z.string().optional(),
   time: z.string().optional(),
   location: z.string(),
   tags: z.array(z.string()),
@@ -217,12 +220,18 @@ export function getAllEventsFromMarkdown(): Event[] {
     .sort(sortByDateAscWithUnknownLast)
 }
 
-export function getUpcomingEventsFromMarkdown(): Event[] {
+export function getUpcomingEventsFromMarkdown(locale: 'es' | 'en' = 'es'): Event[] {
   return listMarkdownFiles(EVENTS_UPCOMING_DIR)
     .map((filePath) => parseMarkdownFrontmatter(filePath, eventSchema))
     .filter((event): event is Event => event !== null)
     .filter((event) => event.published !== false)
     .filter((event) => event.status === 'upcoming')
+    .map((event) => ({
+      ...event,
+      title: locale === 'en' ? (event.titleEn ?? event.title) : event.title,
+      description: locale === 'en' ? (event.descriptionEn ?? event.description) : event.description,
+      speakerCompany: locale === 'en' ? (event.speakerCompanyEn ?? event.speakerCompany) : event.speakerCompany,
+    }))
     .sort(sortByDateAscWithUnknownLast)
 }
 
