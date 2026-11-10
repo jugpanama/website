@@ -7,6 +7,7 @@ import TrackedLink from '@/components/TrackedLink'
 import EventViewTracker from '@/components/EventViewTracker'
 import { analyticsEvents } from '@/lib/analytics-events'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 const typeLabel: Record<string, string> = {
   virtual: 'Virtual',
@@ -14,9 +15,9 @@ const typeLabel: Record<string, string> = {
   hibrido: 'Híbrido',
 }
 
-export default function EventosProximosPage() {
+export default function EventosProximosPage({ locale = 'es' }: { locale?: 'es' | 'en' }) {
   const t = useTranslations('eventsPage')
-  const upcomingEvents = getUpcomingEventsFromMarkdown()
+  const upcomingEvents = getUpcomingEventsFromMarkdown(locale)
   const nextEvent = upcomingEvents[0] ?? null
 
   return (
@@ -123,6 +124,17 @@ export default function EventosProximosPage() {
                 </div>
 
                 <div className="px-5 py-5 md:px-8 md:py-6">
+                  {event.thumbnailUrl && (
+                    <div className="relative mb-6 aspect-video overflow-hidden rounded-xl border border-[#E9ECEF]">
+                      <Image
+                        src={event.thumbnailUrl}
+                        alt={`Preview: ${event.title}`}
+                        fill
+                        sizes="(min-width: 1024px) 960px, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
                   <p className="text-[#495057] mb-5">{event.description}</p>
 
                   <div className="flex flex-wrap gap-5 text-sm text-[#6C757D] mb-5">
@@ -237,7 +249,7 @@ export default function EventosProximosPage() {
                         eventParams={{ event_id: event.id, provider: canStream ? 'youtube' : 'luma' }}
                         className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2F4F7A] hover:underline"
                       >
-                        {canStream ? 'Abrir transmisión en YouTube' : 'Abrir registro en Luma'}
+                        {canStream ? t('openYoutube') : t('openRegistrationLink')}
                         <ArrowRight className="h-3.5 w-3.5" />
                       </TrackedLink>
                     </div>

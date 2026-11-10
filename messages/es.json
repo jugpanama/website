@@ -46,7 +46,7 @@
     "leadership": {
       "eyebrow": "Liderazgo",
       "title": "Construyendo la comunidad paso a paso",
-      "role": "Líder de JUG",
+      "role": "Panama JUG Líder",
       "profileLabel": "Ver el perfil de GitHub de Jesús Aguirre",
       "githubLabel": "GitHub de Jesús Aguirre",
       "linkedinLabel": "LinkedIn de Jesús Aguirre"
@@ -65,11 +65,11 @@
       "hybrid": "Híbrido",
       "dateUnknown": "Fecha por confirmar",
       "timeUnknown": "Hora por confirmar",
-      "stream": "Ver transmisión",
+      "stream": "Notificarme en YouTube",
       "register": "Abrir registro",
       "streamSoon": "Transmisión próximamente",
       "registerSoon": "Registro próximamente",
-      "openStreamLabel": "Abrir transmisión del evento {title} en YouTube",
+      "openStreamLabel": "Abrir el evento {title} en YouTube y activar la notificación",
       "openRegisterLabel": "Abrir registro del evento {title} en Luma"
     },
     "past": {
@@ -225,7 +225,9 @@
     "streamText": "La transmisión se abre en YouTube en una nueva pestaña.",
     "registrationTitle": "Registro del evento",
     "registrationText": "El registro se abre en Luma en una nueva pestaña.",
-    "watchStream": "Ver transmisión",
+    "watchStream": "Notificarme en YouTube",
+    "openYoutube": "Abrir transmisión en YouTube",
+    "openRegistrationLink": "Abrir registro en Luma",
     "openRegistration": "Abrir registro",
     "streamUnavailable": "Transmisión no disponible por ahora",
     "registrationUnavailable": "Registro no disponible por ahora"

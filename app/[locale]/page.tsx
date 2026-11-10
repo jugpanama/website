@@ -16,7 +16,7 @@ import {
 
 export default async function LocaleHomePage({ params }: { params: Promise<{ locale: 'es' | 'en' }> }) {
   const { locale } = await params
-  const upcomingEvents = getUpcomingEventsFromMarkdown()
+  const upcomingEvents = getUpcomingEventsFromMarkdown(locale)
   const pastEvents = getPastEventsFromMarkdown()
   const pastEventsPreview = pastEvents.slice(0, 3)
   const nextEvent = getNextEventWithEmbedFromMarkdown()
@@ -32,7 +32,9 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
         </div>
         <MeetTheTeam />
         <UpcomingEvents upcomingEvents={upcomingEvents} />
-        <PastEvents pastEvents={pastEventsPreview} totalCount={pastEvents.length} />
+        {pastEvents.length > 0 && (
+          <PastEvents pastEvents={pastEventsPreview} totalCount={pastEvents.length} />
+        )}
         <EventsEmbed nextEvent={nextEvent} />
         <Notes notes={notes} />
       </main>

@@ -2,6 +2,7 @@
 
 import { Link } from '@/i18n/navigation'
 import type { Event } from '@/lib/data'
+import Image from 'next/image'
 import { MapPin, Clock, ArrowRight, ExternalLink, Radio } from 'lucide-react'
 import { useInView } from '@/hooks/use-in-view'
 import { useTranslations } from 'next-intl'
@@ -92,6 +93,17 @@ export default function UpcomingEvents({ upcomingEvents }: { upcomingEvents: Eve
                 className={`card-hover flex flex-col rounded-2xl border border-white/16 bg-[linear-gradient(180deg,rgba(70,110,164,0.92)_0%,rgba(44,74,114,0.96)_100%)] p-5 sm:p-6 shadow-[0_16px_36px_-20px_rgba(0,0,0,0.55)] transition-all duration-700 ease-out ${cardsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: cardsInView ? `${i * 110}ms` : '0ms' }}
               >
+                {event.thumbnailUrl && (
+                  <div className="relative mb-5 aspect-video overflow-hidden rounded-xl border border-white/15">
+                    <Image
+                      src={event.thumbnailUrl}
+                      alt={`Preview: ${event.title}`}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
                 {/* Date and type */}
                 <div className="mb-4 flex flex-wrap items-center gap-2.5">
                   <span className="rounded-md bg-[#1A2E4A] px-3 py-1.5 font-mono text-sm tracking-[0.04em] text-[#F8B04A]">
