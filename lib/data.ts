@@ -11,7 +11,9 @@ export type SponsorCategory = 'sponsor' | 'partner'
 export interface Event {
   id: string
   title: string
+  titleEn?: string
   description: string
+  descriptionEn?: string
   summary?: string
   date?: string
   displayDate?: string
@@ -19,6 +21,7 @@ export interface Event {
   status: EventStatus
   speakerName: string
   speakerCompany: string
+  speakerCompanyEn?: string
   time?: string
   location: string
   tags: string[]

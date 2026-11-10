@@ -46,7 +46,7 @@
     "leadership": {
       "eyebrow": "Leadership",
       "title": "Building the community step by step",
-      "role": "JUG Leader",
+      "role": "Panama Users Group Leader",
       "profileLabel": "View Jesús Aguirre's GitHub profile",
       "githubLabel": "Jesús Aguirre's GitHub",
       "linkedinLabel": "Jesús Aguirre's LinkedIn"
@@ -65,11 +65,11 @@
       "hybrid": "Hybrid",
       "dateUnknown": "Date to be confirmed",
       "timeUnknown": "Time to be confirmed",
-      "stream": "Watch stream",
+      "stream": "Get notified on YouTube",
       "register": "Open registration",
       "streamSoon": "Stream coming soon",
       "registerSoon": "Registration coming soon",
-      "openStreamLabel": "Open the {title} event stream on YouTube",
+      "openStreamLabel": "Open the {title} event on YouTube and enable notifications",
       "openRegisterLabel": "Open registration for the {title} event on Luma"
     },
     "past": {
@@ -225,7 +225,9 @@
     "streamText": "The stream opens on YouTube in a new tab.",
     "registrationTitle": "Event registration",
     "registrationText": "Registration opens on Luma in a new tab.",
-    "watchStream": "Watch stream",
+    "watchStream": "Get notified on YouTube",
+    "openYoutube": "Open stream on YouTube",
+    "openRegistrationLink": "Open registration on Luma",
     "openRegistration": "Open registration",
     "streamUnavailable": "Stream unavailable for now",
     "registrationUnavailable": "Registration unavailable for now"
